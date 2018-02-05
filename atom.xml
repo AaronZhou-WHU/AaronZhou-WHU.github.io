@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>知之の部屋</title>
+  
+  <subtitle>知之为知之，不知为不知</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://aaronzhou-whu.github.io/"/>
+  <updated>2018-02-04T07:08:30.000Z</updated>
+  <id>https://aaronzhou-whu.github.io/</id>
+  
+  <author>
+    <name>Aaron Zhou</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://aaronzhou-whu.github.io//404.html"/>
+    <id>https://aaronzhou-whu.github.io//404.html</id>
+    <published>2018-02-02T15:48:18.000Z</published>
+    <updated>2018-02-04T07:08:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://aaronzhou-whu.github.io/">知之の部屋</a>！以前很懒，看过的东西不加总结，时间长了就忘记了，是时候养成写博文的习惯，毕竟好记忆不如烂笔头。 记录自己的学习过程，通往大牛的路上没有终点… </p><p>####知之为知之，不知为不知</p><p>supercalifragilisticexpialidocious</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://aaronzhou-whu.github.io/&quot;&gt;知之の部屋&lt;/a&gt;！以前很懒，看过的东西不加总结，时间长了就忘记了，是时候养成写博文的习惯，毕竟好记忆不如烂笔头。 记录自己的学习过程，通往大牛的路上没有终点… &lt;/
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
