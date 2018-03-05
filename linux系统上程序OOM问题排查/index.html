@@ -73,17 +73,17 @@
 
 
 
-<meta name="description" content="stay hungary, stay foolish">
+<meta name="description" content="Linux上的redis服务器，写数据时发现数据写的不完整，很多没写进去，看日子发现报错：SocketException: Broken pipe (Write failed) ，这种错误一般都是redis挂掉了吧，重启redis，重复执行程序，还是会报错，调试代码，运行少量数据（任然是多线程起任务），发现可以完整写入，那应该不是并发的问题，单机redis挂掉，不是因为并发引起的阻塞timeout">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux系统上程序OOM问题排查与解决方案">
 <meta property="og:url" content="https://aaronzhou-whu.github.io/linux系统上程序OOM问题排查/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="stay hungary, stay foolish">
+<meta property="og:description" content="Linux上的redis服务器，写数据时发现数据写的不完整，很多没写进去，看日子发现报错：SocketException: Broken pipe (Write failed) ，这种错误一般都是redis挂掉了吧，重启redis，重复执行程序，还是会报错，调试代码，运行少量数据（任然是多线程起任务），发现可以完整写入，那应该不是并发的问题，单机redis挂掉，不是因为并发引起的阻塞timeout">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-27T11:55:31.000Z">
+<meta property="og:updated_time" content="2018-03-05T16:04:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux系统上程序OOM问题排查与解决方案">
-<meta name="twitter:description" content="stay hungary, stay foolish">
+<meta name="twitter:description" content="Linux上的redis服务器，写数据时发现数据写的不完整，很多没写进去，看日子发现报错：SocketException: Broken pipe (Write failed) ，这种错误一般都是redis挂掉了吧，重启redis，重复执行程序，还是会报错，调试代码，运行少量数据（任然是多线程起任务），发现可以完整写入，那应该不是并发的问题，单机redis挂掉，不是因为并发引起的阻塞timeout">
 
 
 
@@ -338,7 +338,10 @@
       
 
       
-        
+        <p>Linux上的redis服务器，写数据时发现数据写的不完整，很多没写进去，看日子发现报错：SocketException: Broken pipe (Write failed) ，这种错误一般都是redis挂掉了吧，重启redis，重复执行程序，还是会报错，调试代码，运行少量数据（任然是多线程起任务），发现可以完整写入，那应该不是并发的问题，单机redis挂掉，不是因为并发引起的阻塞timeout，那很有可能是空间不足了，毕竟是测试环境，硬件一般。检查redis的配置文件，找到rdb备份文件，du命令查看占用的存储空间，发现果然满了，去/var/log/message下查看系统日志，找到了“kernel: Out of memory: Kill process”字样。</p>
+<p>du命令查看发现home目录空间严重不足，解决方法一是关闭redis持久化，这种方法在实际应用时是不可取的，只是在测试环境中作为一个临时方案；二是把redis的备份文件目录设置到其他大的空间目录下。</p>
+<p>总的来说，单机redis问题多多，稳定性太差，可以使用基于redis集群方案实现的codis。</p>
+
       
     </div>
     
