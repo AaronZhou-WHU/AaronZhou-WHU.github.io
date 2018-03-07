@@ -338,7 +338,12 @@
         
           
           
-          
+try catch finally语句块中含有return时的执行顺序：finally会在try代码块的return之前执行
+
+try中的return如果是普通变量，则finally语句块中对该变量的修改并不会影响到最终的return值；如果是对象类型，则会影响
+
+finally中如果有retur
+          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/异常处理小结/#more" rel="contents">

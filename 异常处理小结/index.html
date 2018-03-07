@@ -73,17 +73,17 @@
 
 
 
-<meta name="description" content="stay hungary, stay foolish">
+<meta name="description" content="try catch finally语句块中含有return时的执行顺序：finally会在try代码块的return之前执行  try中的return如果是普通变量，则finally语句块中对该变量的修改并不会影响到最终的return值；如果是对象类型，则会影响  finally中如果有return语句，则会覆盖掉之前的return返回值  如果catch块中捕获了异常, 并且在catch块中将">
 <meta property="og:type" content="article">
 <meta property="og:title" content="异常处理小结">
 <meta property="og:url" content="https://aaronzhou-whu.github.io/异常处理小结/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="stay hungary, stay foolish">
+<meta property="og:description" content="try catch finally语句块中含有return时的执行顺序：finally会在try代码块的return之前执行  try中的return如果是普通变量，则finally语句块中对该变量的修改并不会影响到最终的return值；如果是对象类型，则会影响  finally中如果有return语句，则会覆盖掉之前的return返回值  如果catch块中捕获了异常, 并且在catch块中将">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-06T15:01:12.000Z">
+<meta property="og:updated_time" content="2018-03-07T11:44:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="异常处理小结">
-<meta name="twitter:description" content="stay hungary, stay foolish">
+<meta name="twitter:description" content="try catch finally语句块中含有return时的执行顺序：finally会在try代码块的return之前执行  try中的return如果是普通变量，则finally语句块中对该变量的修改并不会影响到最终的return值；如果是对象类型，则会影响  finally中如果有return语句，则会覆盖掉之前的return返回值  如果catch块中捕获了异常, 并且在catch块中将">
 
 
 
@@ -338,7 +338,22 @@
       
 
       
-        
+        <ol>
+<li><p>try catch finally语句块中含有return时的执行顺序：finally会在try代码块的return之前执行</p>
+</li>
+<li><p>try中的return如果是普通变量，则finally语句块中对该变量的修改并不会影响到最终的return值；如果是对象类型，则会影响</p>
+</li>
+<li><p>finally中如果有return语句，则会覆盖掉之前的return返回值</p>
+</li>
+<li><p>如果catch块中捕获了异常, 并且在catch块中将该异常throw给上级调用者进行处理, 但finally中return了, 那么catch块中的throw就失效了, 上级方法调用者是捕获不到异常的–<strong>finally中的return会覆盖掉catch中抛出的异常</strong></p>
+</li>
+<li><p>1.6中catch throw e并且函数要throws Exception，而1.8中只需在catch中throw即可</p>
+</li>
+<li><p>参考链接<a href="https://www.jianshu.com/p/36692cb517bc" target="_blank" rel="noopener">https://www.jianshu.com/p/36692cb517bc</a></p>
+</li>
+<li>参考链接<a href="https://www.cnblogs.com/wyisprogramming/p/6610950.html" target="_blank" rel="noopener">https://www.cnblogs.com/wyisprogramming/p/6610950.html</a></li>
+</ol>
+
       
     </div>
     
