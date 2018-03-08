@@ -73,17 +73,17 @@
 
 
 
-<meta name="description" content="stay hungary, stay foolish">
+<meta name="description" content="中间件（middleware），从字面上来看，是不同的系统或程序之间的中间人，是一种交互媒介（通道），中间件屏蔽了各自的细节，方便不同的系统更加关注于彼此的业务。  百度百科上的解释：中间件是一种独立的系统软件或服务程序，分布式应用软件借助这种软件在不同的技术之间共享资源。中间件位于客户机/ 服务器的操作系统之上，管理计算机资源和网络通讯。是连接两个独立应用程序或独立系统的软件。相连接的系统，即使">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java中间件之我的浅显理解">
 <meta property="og:url" content="https://aaronzhou-whu.github.io/Java中间件之我的浅显理解/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="stay hungary, stay foolish">
+<meta property="og:description" content="中间件（middleware），从字面上来看，是不同的系统或程序之间的中间人，是一种交互媒介（通道），中间件屏蔽了各自的细节，方便不同的系统更加关注于彼此的业务。  百度百科上的解释：中间件是一种独立的系统软件或服务程序，分布式应用软件借助这种软件在不同的技术之间共享资源。中间件位于客户机/ 服务器的操作系统之上，管理计算机资源和网络通讯。是连接两个独立应用程序或独立系统的软件。相连接的系统，即使">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-07T15:17:37.000Z">
+<meta property="og:updated_time" content="2018-03-08T13:15:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中间件之我的浅显理解">
-<meta name="twitter:description" content="stay hungary, stay foolish">
+<meta name="twitter:description" content="中间件（middleware），从字面上来看，是不同的系统或程序之间的中间人，是一种交互媒介（通道），中间件屏蔽了各自的细节，方便不同的系统更加关注于彼此的业务。  百度百科上的解释：中间件是一种独立的系统软件或服务程序，分布式应用软件借助这种软件在不同的技术之间共享资源。中间件位于客户机/ 服务器的操作系统之上，管理计算机资源和网络通讯。是连接两个独立应用程序或独立系统的软件。相连接的系统，即使">
 
 
 
@@ -338,7 +338,30 @@
       
 
       
-        
+        <p>中间件（middleware），从字面上来看，是不同的系统或程序之间的中间人，是一种交互媒介（通道），中间件屏蔽了各自的细节，方便不同的系统更加关注于彼此的业务。</p>
+<blockquote>
+<p>百度百科上的解释：中间件是一种独立的系统软件或服务程序，分布式应用软件借助这种软件在不同的技术之间共享资源。中间件位于客户机/ 服务器的操作系统之上，管理计算机资源和网络通讯。是连接两个独立应用程序或独立系统的软件。相连接的系统，即使它们具有不同的接口，但通过中间件相互之间仍能交换信息。执行中间件的一个关键途径是信息传递。通过中间件，应用程序可以工作于多平台或OS环境。</p>
+</blockquote>
+<p>Java中间件常见的三个邻域：</p>
+<blockquote>
+<ul>
+<li>远程过程调用和对象访问中间件</li>
+</ul>
+</blockquote>
+<p>主要解决分布式环境下应用的互相访问问题，这也是支撑应用服务化功能的基础。例如：RPC：Remote Process Call（远程过程调用中间件）</p>
+<blockquote>
+<ul>
+<li>消息中间件</li>
+</ul>
+</blockquote>
+<p>解决应用之间的消息传递、解耦、异步的问题。kafka,activeMQ等。</p>
+<blockquote>
+<ul>
+<li>数据访问中间件</li>
+</ul>
+</blockquote>
+<p>Atlas,Cobar等（mysql数据库）。底层的数据查询过程对于调用者来说是透明的。</p>
+
       
     </div>
     
