@@ -73,17 +73,17 @@
 
 
 
-<meta name="description" content="stay hungary, stay foolish">
+<meta name="description" content="大数据处理框架比较常见的又hadoop、spark以及storm。Hadoop是基于HDFS的，数据都存储在磁盘上，io开销比较大；storm是基于内存的，使用zeroMQ消息中间件传递消息，速度比较快。   Hadoop M/R基于HDFS，需要切分输入数据、产生中间数据文件、排序、数据压缩、多份复制等，效率较低。 Storm 基于ZeroMQ高性能的消息中间件，不持久化数据，效率高。 Spar">
 <meta property="og:type" content="article">
-<meta property="og:title" content="流式计算框架">
+<meta property="og:title" content="大数据处理框架简介">
 <meta property="og:url" content="https://aaronzhou-whu.github.io/流式计算框架/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="stay hungary, stay foolish">
+<meta property="og:description" content="大数据处理框架比较常见的又hadoop、spark以及storm。Hadoop是基于HDFS的，数据都存储在磁盘上，io开销比较大；storm是基于内存的，使用zeroMQ消息中间件传递消息，速度比较快。   Hadoop M/R基于HDFS，需要切分输入数据、产生中间数据文件、排序、数据压缩、多份复制等，效率较低。 Storm 基于ZeroMQ高性能的消息中间件，不持久化数据，效率高。 Spar">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-10T14:49:45.000Z">
+<meta property="og:updated_time" content="2018-03-16T07:52:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="流式计算框架">
-<meta name="twitter:description" content="stay hungary, stay foolish">
+<meta name="twitter:title" content="大数据处理框架简介">
+<meta name="twitter:description" content="大数据处理框架比较常见的又hadoop、spark以及storm。Hadoop是基于HDFS的，数据都存储在磁盘上，io开销比较大；storm是基于内存的，使用zeroMQ消息中间件传递消息，速度比较快。   Hadoop M/R基于HDFS，需要切分输入数据、产生中间数据文件、排序、数据压缩、多份复制等，效率较低。 Storm 基于ZeroMQ高性能的消息中间件，不持久化数据，效率高。 Spar">
 
 
 
@@ -119,7 +119,7 @@
 
 
 
-  <title>流式计算框架 | BinYingの部屋</title>
+  <title>大数据处理框架简介 | BinYingの部屋</title>
   
 
 
@@ -283,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">流式计算框架</h1>
+          <h1 class="post-title" itemprop="name headline">大数据处理框架简介</h1>
         
 
         <div class="post-meta">
@@ -338,7 +338,16 @@
       
 
       
-        
+        <p>大数据处理框架比较常见的又hadoop、spark以及storm。Hadoop是基于HDFS的，数据都存储在磁盘上，io开销比较大；storm是基于内存的，使用zeroMQ消息中间件传递消息，速度比较快。</p>
+<blockquote>
+<ul>
+<li>Hadoop M/R基于HDFS，需要切分输入数据、产生中间数据文件、排序、数据压缩、多份复制等，效率较低。</li>
+<li>Storm 基于ZeroMQ高性能的消息中间件，不持久化数据，效率高。</li>
+<li>Spark基于Map Reduce算法实现的分布式计算，拥有Hadoop MapReduce所具有的优点，但不同于MapReduce的是Job中间输出和结果可以保存在内存中，从而不再需要读写HDFS，因此Spark能更好地适用于数据挖掘与机器学习等需要迭代的Map Reduce的算法</li>
+</ul>
+</blockquote>
+<p>Hadoop适合于离线的批量数据处理适用于对实时性要求极低的场景;Storm适合于实时流数据处理，实时性方面做得极好;Spark介于二者之间，批处理方面性能优于Map-Reduce，（Spark streaming）流处理目前弱于Storm。</p>
+
       
     </div>
     
@@ -446,7 +455,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
