@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://aaronzhou-whu.github.io/"/>
-  <updated>2018-06-26T15:30:31.000Z</updated>
+  <updated>2018-06-26T15:33:09.000Z</updated>
   <id>https://aaronzhou-whu.github.io/</id>
   
   <author>
@@ -21,12 +21,14 @@
     <link href="https://aaronzhou-whu.github.io/knn%E7%AE%97%E6%B3%95/"/>
     <id>https://aaronzhou-whu.github.io/knn算法/</id>
     <published>2018-06-26T15:30:31.000Z</published>
-    <updated>2018-06-26T15:30:31.000Z</updated>
+    <updated>2018-06-26T15:33:09.000Z</updated>
     
     <summary type="html">
     
     </summary>
     
+    
+      <category term="machine learning" scheme="https://aaronzhou-whu.github.io/tags/machine-learning/"/>
     
   </entry>
   
