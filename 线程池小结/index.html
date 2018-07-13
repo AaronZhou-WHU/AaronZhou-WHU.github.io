@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog72.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="multi-thread," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="至于为什么要用多线程，以及线程池的好处这里就不说了。这周又粗略看了一遍《Java并发编程的艺术》，又了解了一遍多线程以及线程池的相关知识，为什么这里总是提到“又”，那时因为以前看过，看完也不加总结，总是遗忘，此次总结一下，希望遗忘曲线能够延长一些。 一. Java通过Executors提供四种线程池，分别为：newCachedThreadPool创建一个可缓存线程池，如果线程池长度超过处理需要，可">
+<meta name="keywords" content="multi-thread">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程池小结">
+<meta property="og:url" content="https://aaronzhou-whu.github.io/线程池小结/index.html">
+<meta property="og:site_name" content="BinYingの部屋">
+<meta property="og:description" content="至于为什么要用多线程，以及线程池的好处这里就不说了。这周又粗略看了一遍《Java并发编程的艺术》，又了解了一遍多线程以及线程池的相关知识，为什么这里总是提到“又”，那时因为以前看过，看完也不加总结，总是遗忘，此次总结一下，希望遗忘曲线能够延长一些。 一. Java通过Executors提供四种线程池，分别为：newCachedThreadPool创建一个可缓存线程池，如果线程池长度超过处理需要，可">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-13T12:38:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线程池小结">
+<meta name="twitter:description" content="至于为什么要用多线程，以及线程池的好处这里就不说了。这周又粗略看了一遍《Java并发编程的艺术》，又了解了一遍多线程以及线程池的相关知识，为什么这里总是提到“又”，那时因为以前看过，看完也不加总结，总是遗忘，此次总结一下，希望遗忘曲线能够延长一些。 一. Java通过Executors提供四种线程池，分别为：newCachedThreadPool创建一个可缓存线程池，如果线程池长度超过处理需要，可">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://aaronzhou-whu.github.io/线程池小结/"/>
+
+
+
+
+
+  <title>线程池小结 | BinYingの部屋</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BinYingの部屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知之为知之，不知为不知</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/线程池小结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron Zhou">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BinYingの部屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">线程池小结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-13T19:54:39+08:00">
+                2018-07-13 19:54:39
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>至于为什么要用多线程，以及线程池的好处这里就不说了。这周又粗略看了一遍《Java并发编程的艺术》，又了解了一遍多线程以及线程池的相关知识，为什么这里总是提到“又”，那时因为以前看过，看完也不加总结，总是遗忘，此次总结一下，希望遗忘曲线能够延长一些。</p>
+<h3 id="一-Java通过Executors提供四种线程池，分别为："><a href="#一-Java通过Executors提供四种线程池，分别为：" class="headerlink" title="一. Java通过Executors提供四种线程池，分别为："></a>一. Java通过Executors提供四种线程池，分别为：</h3><p><strong>newCachedThreadPool</strong><br>创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。<br>CachedThreadPool 是通过 java.util.concurrent.Executors 创建的 ThreadPoolExecutor 实例。这个实例会根据需要，在线程可用时，重用之前构造好的池中线程。这个线程池在执行 大量短生命周期的异步任务时（many short-lived asynchronous task），可以显著提高程序性能。调用 execute 时，可以重用之前已构造的可用线程，如果不存在可用线程，那么会重新创建一个新的线程并将其加入到线程池中。如果线程超过 60 秒还未被使用，就会被中止并从缓存中移除。因此，线程池在长时间空闲后不会消耗任何资源。<br><strong>newFixedThreadPool</strong> 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。<br>FixedThreadPool 是通过 java.util.concurrent.Executors 创建的 ThreadPoolExecutor 实例。这个实例会复用 固定数量的线程 处理一个 共享的无边界队列 。任何时间点，最多有 nThreads 个线程会处于活动状态执行任务。如果当所有线程都是活动时，有多的任务被提交过来，那么它会一致在队列中等待直到有线程可用。如果任何线程在执行过程中因为错误而中止，新的线程会替代它的位置来执行后续的任务。所有线程都会一致存于线程池中，直到显式的执行 ExecutorService.shutdown() 关闭。<br><strong>newScheduledThreadPool</strong> 创建一个定长线程池，支持定时及周期性任务执行。<br><strong>newSingleThreadExecutor</strong> 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。<br>SingleThreadPool 是通过 java.util.concurrent.Executors 创建的 ThreadPoolExecutor 实例。这个实例只会使用单个工作线程来执行一个无边界的队列。（注意，如果单个线程在执行过程中因为某些错误中止，新的线程会替代它执行后续线程）。它可以保证认为是按顺序执行的，任何时候都不会有多于一个的任务处于活动状态。和 newFixedThreadPool(1) 的区别在于，如果线程遇到错误中止，它是无法使用替代线程的。</p>
+<h3 id="FixedThreadPool-与-CachedThreadPool-特性对比"><a href="#FixedThreadPool-与-CachedThreadPool-特性对比" class="headerlink" title="FixedThreadPool 与 CachedThreadPool 特性对比"></a>FixedThreadPool 与 CachedThreadPool 特性对比</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th style="text-align:center">FixedThreadPool</th>
+<th style="text-align:center">CachedThreadPool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>重用</td>
+<td style="text-align:center">FixedThreadPool 与 CacheThreadPool差不多，也是能 reuse 就用，但不能随时建新的线程</td>
+<td style="text-align:center">缓存型池子，先查看池中有没有以前建立的线程，如果有，就 reuse ；如果没有，就建一个新的线程加入池中</td>
+</tr>
+<tr>
+<td>池大小</td>
+<td style="text-align:center">可指定 nThreads，固定数量</td>
+<td style="text-align:center">可增长，最大值 Integer.MAX_VALUE</td>
+</tr>
+<tr>
+<td>队列大小</td>
+<td style="text-align:center">无限制</td>
+<td style="text-align:center">无限制</td>
+</tr>
+<tr>
+<td>超时</td>
+<td style="text-align:center">无 IDLE</td>
+<td style="text-align:center">默认60秒 IDLE</td>
+</tr>
+<tr>
+<td>使用场景</td>
+<td style="text-align:center">FixedThreadPool多数针对一些很稳定很固定的正规并发线程，多用于服务器</td>
+<td style="text-align:center">大量短生命周期的异步任务</td>
+</tr>
+<tr>
+<td>结束</td>
+<td style="text-align:center">不会自动销毁</td>
+<td style="text-align:center">放入 CachedThreadPool 的线程不必担心其结束，超过 TIMEOUT 不活动，其会自动被终止。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="二-ThreadPoolExecutor的重要参数"><a href="#二-ThreadPoolExecutor的重要参数" class="headerlink" title="二. ThreadPoolExecutor的重要参数"></a>二. ThreadPoolExecutor的重要参数</h3><p><strong>corePoolSize：核心线程数</strong><br>核心线程会一直存活，及时没有任务需要执行<br>当线程数小于核心线程数时，即使有线程空闲，线程池也会优先创建新线程处理<br>设置allowCoreThreadTimeout=true（默认false）时，核心线程会超时关闭<br><strong>queueCapacity：任务队列容量（阻塞队列）</strong><br>当核心线程数达到最大时，新任务会放在队列中排队等待执行<br><strong>maxPoolSize：最大线程数</strong><br>当线程数&gt;=corePoolSize，且任务队列已满时。线程池会创建新线程来处理任务<br>当线程数=maxPoolSize，且任务队列已满时，线程池会拒绝处理任务而抛出异常<br><strong>keepAliveTime：线程空闲时间</strong><br>当线程空闲时间达到keepAliveTime时，线程会退出，直到线程数量=corePoolSize<br>如果allowCoreThreadTimeout=true，则会直到线程数量=0<br><strong>allowCoreThreadTimeout：允许核心线程超时</strong><br><strong>rejectedExecutionHandler：任务拒绝处理器</strong><br>1.两种情况会拒绝处理任务：</p>
+<blockquote>
+<ul>
+<li>当线程数已经达到maxPoolSize，切队列已满，会拒绝新任务</li>
+<li>当线程池被调用shutdown()后，会等待线程池里的任务执行完毕，再shutdown。如果在调用shutdown()和线程池真正shutdown之间提交任务，会拒绝新任务</li>
+</ul>
+</blockquote>
+<p>2.线程池会调用rejectedExecutionHandler来处理这个任务。如果没有设置默认是AbortPolicy，会抛出异常<br>3.ThreadPoolExecutor类有几个内部实现类来处理这类情况：</p>
+<blockquote>
+<ul>
+<li>AbortPolicy 丢弃任务，抛运行时异常</li>
+<li>CallerRunsPolicy 执行任务</li>
+<li>DiscardPolicy 忽视，什么都不会发生</li>
+<li>DiscardOldestPolicy 从队列中踢出最先进入队列（最后一个执行）的任务</li>
+</ul>
+</blockquote>
+<h3 id="三-线程池按以下行为执行任务"><a href="#三-线程池按以下行为执行任务" class="headerlink" title="三. 线程池按以下行为执行任务"></a>三. 线程池按以下行为执行任务</h3><p>1.当线程数小于核心线程数时，创建线程。<br>2.当线程数大于等于核心线程数，且任务队列未满时，将任务放入任务队列。</p>
+<ol>
+<li>当线程数大于等于核心线程数，且任务队列已满<blockquote>
+<ul>
+<li>若线程数小于最大线程数，创建线程</li>
+<li>若线程数等于最大线程数，抛出异常，拒绝任务</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<h3 id="四-线程池的底层实现"><a href="#四-线程池的底层实现" class="headerlink" title="四. 线程池的底层实现"></a>四. 线程池的底层实现</h3><p>上节中有个参数是queueCapacity，提到queue，必然要提到各种线程池的底层的阻塞队列的实现方式<br><strong>SynchronousQueue——直接提交策略</strong><br>适用于CachedThreadPool。它将任务直接提交给线程而不保持它们。如果不存在可用于立即运行任务的线程，则试图把任务加入队列将失败，因此会构造一个新的线程。此策略可以避免在处理可能具有内部依赖性的请求集时出现锁。直接提交通常要求最大的 maximumPoolSize 以避免拒绝新提交的任务（正如CachedThreadPool这个参数的值为Integer.MAX_VALUE）。当任务以超过队列所能处理的量、连续到达时，此策略允许线程具有增长的可能性。吞吐量较高。</p>
+<p><strong>LinkedBlockingQueue——无界队列</strong><br>适用于FixedThreadPool与SingleThreadExcutor。基于链表的阻塞队列，创建的线程数不会超过corePoolSizes（maximumPoolSize值与其一致），当线程正忙时，任务进入队列等待。按照FIFO原则对元素进行排序，吞吐量高于ArrayBlockingQueue。</p>
+<p><strong>ArrayListBlockingQueue——有界队列</strong><br>有助于防止资源耗尽，但是可能较难调整和控制。队列大小和最大池大小可能需要相互折衷：使用大型队列和小型池可以最大限度地降低 CPU 使用率、操作系统资源和上下文切换开销，但是可能导致人工降低吞吐量。如果任务频繁阻塞（例如，如果它们是 I/O边界），则系统可能为超过您许可的更多线程安排时间。使用小型队列通常要求较大的池大小，CPU使用率较高，但是可能遇到不可接受的调度开销，这样也会降低吞吐量。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/multi-thread/" rel="tag"># multi-thread</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/设计模式整理（一）/" rel="next" title="设计模式整理（一）">
+                <i class="fa fa-chevron-left"></i> 设计模式整理（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Aaron Zhou" />
+            
+              <p class="site-author-name" itemprop="name">Aaron Zhou</p>
+              <p class="site-description motion-element" itemprop="description">stay hungary, stay foolish</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/AaronZhou-WHU" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhoubin_whu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-Java通过Executors提供四种线程池，分别为："><span class="nav-number">1.</span> <span class="nav-text">一. Java通过Executors提供四种线程池，分别为：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FixedThreadPool-与-CachedThreadPool-特性对比"><span class="nav-number">2.</span> <span class="nav-text">FixedThreadPool 与 CachedThreadPool 特性对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-ThreadPoolExecutor的重要参数"><span class="nav-number">3.</span> <span class="nav-text">二. ThreadPoolExecutor的重要参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-线程池按以下行为执行任务"><span class="nav-number">4.</span> <span class="nav-text">三. 线程池按以下行为执行任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-线程池的底层实现"><span class="nav-number">5.</span> <span class="nav-text">四. 线程池的底层实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron Zhou</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
