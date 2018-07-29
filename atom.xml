@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://aaronzhou-whu.github.io/"/>
-  <updated>2018-07-28T16:04:26.000Z</updated>
+  <updated>2018-07-29T15:33:14.000Z</updated>
   <id>https://aaronzhou-whu.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://aaronzhou-whu.github.io/Kaggle%E4%B9%8BTitanic/"/>
     <id>https://aaronzhou-whu.github.io/Kaggle之Titanic/</id>
     <published>2018-07-28T15:47:34.000Z</published>
-    <updated>2018-07-28T16:04:26.000Z</updated>
+    <updated>2018-07-29T15:33:14.000Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>In this challenge, we ask you to complete the analysis of what sorts of people were likely to survive. In particular, we ask you to apply the tools of machine learning to predict which passengers survived the tragedy.</p></blockquote><hr><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>问题：这个问题很明显是一道分类问题，预测<code>survive or die</code>的二分类问题。<br>方法：逻辑回归(LogisticRegression)、支持向量机(SVM)、CART</p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>In this challenge, we ask you to complete the analysis of what sorts of people were likely to survive. In particular, we ask you to apply the tools of machine learning to predict which passengers survived the tragedy.</p></blockquote><hr><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>问题：这个问题很明显是一道分类问题，预测<code>survive or die</code>的二分类问题。<br>方法：逻辑回归(LogisticRegression)、支持向量机(SVM)、CART等</p>]]></content>
     
     <summary type="html">
     
