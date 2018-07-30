@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="坑一：mybatis 找不到映射器xml文件项目打包的时候，出现了找不到xml文件的错误，Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource xxx/mapper/xxx.xml，我用的绝对路径但是没有加上“file://”，导致出现file not found er">
+<meta name="description" content="坑一：mybatis 找不到映射器xml文件项目打包的时候，出现了找不到xml文件的错误，Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource xxx/mapper/xxx.xml，我用的绝对路径但是没有把resource改为url，导致出现file not found">
 <meta name="keywords" content="MyBatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mybatis避坑总结（持续更新ing）">
 <meta property="og:url" content="https://aaronzhou-whu.github.io/mybatis避坑总结（持续更新ing）/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="坑一：mybatis 找不到映射器xml文件项目打包的时候，出现了找不到xml文件的错误，Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource xxx/mapper/xxx.xml，我用的绝对路径但是没有加上“file://”，导致出现file not found er">
+<meta property="og:description" content="坑一：mybatis 找不到映射器xml文件项目打包的时候，出现了找不到xml文件的错误，Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource xxx/mapper/xxx.xml，我用的绝对路径但是没有把resource改为url，导致出现file not found">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-30T04:12:33.000Z">
+<meta property="og:updated_time" content="2018-07-30T10:50:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis避坑总结（持续更新ing）">
-<meta name="twitter:description" content="坑一：mybatis 找不到映射器xml文件项目打包的时候，出现了找不到xml文件的错误，Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource xxx/mapper/xxx.xml，我用的绝对路径但是没有加上“file://”，导致出现file not found er">
+<meta name="twitter:description" content="坑一：mybatis 找不到映射器xml文件项目打包的时候，出现了找不到xml文件的错误，Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource xxx/mapper/xxx.xml，我用的绝对路径但是没有把resource改为url，导致出现file not found">
 
 
 
@@ -339,7 +339,7 @@
       
 
       
-        <h3 id="坑一：mybatis-找不到映射器xml文件"><a href="#坑一：mybatis-找不到映射器xml文件" class="headerlink" title="坑一：mybatis 找不到映射器xml文件"></a>坑一：mybatis 找不到映射器xml文件</h3><p>项目打包的时候，出现了找不到xml文件的错误，<code>Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource xxx/mapper/xxx.xml</code>，我用的绝对路径但是没有加上“file://”，导致出现<code>file not found</code> error。<br>官方文档给出了四种配置方式：相对路径、绝对路径、Mapper路径、Package路径。<br>```xml<br><!-- Using classpath relative resources --></p>
+        <h3 id="坑一：mybatis-找不到映射器xml文件"><a href="#坑一：mybatis-找不到映射器xml文件" class="headerlink" title="坑一：mybatis 找不到映射器xml文件"></a>坑一：mybatis 找不到映射器xml文件</h3><p>项目打包的时候，出现了找不到xml文件的错误，<code>Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource xxx/mapper/xxx.xml</code>，我用的绝对路径但是没有把resource改为url，导致出现<code>file not found</code> error。<br>官方文档给出了四种配置方式：相对路径、绝对路径、Mapper路径、Package路径。<br>```xml<br><!-- Using classpath relative resources --></p>
 <p><mappers><br>  <mapper resource="xxx/mapper/xxx.xml"><br></mapper></mappers><br><!-- Using url fully qualified paths --></p>
 <p><mappers><br>  <mapper url="file:///xxx/mappers/xxx.xml"><br></mapper></mappers><br><!-- Using mapper interface classes --></p>
 <p><mappers><br>  <mapper class="org.mybatis.builder.XXXMapper"><br></mapper></mappers><br><!-- Register all interfaces in a package as mappers --></p>
