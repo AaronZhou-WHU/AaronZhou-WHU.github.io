@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="machine learning," />
+  <meta name="keywords" content="JVM," />
 
 
 
@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="写在前头：公司最近有个形态选股的项目，根据股票的历史数据，计算出k线相似的股票，并推荐给客户。要用到机器学习相关知识，刚好可以把研究生阶段所学的浅薄知识重拾起来，加以总结。 常见机器学习算法： 决策树（Decision Tree）：在进行逐步应答过程中，典型的决策树分析会使用分层变量或决策节点，例如，可将一个给定用户分类成信用可靠或不可靠。优点：擅长对人、地点、事物的一系列不同特征、品质、特性进行">
-<meta name="keywords" content="machine learning">
+<meta name="description" content="系统定位问题的时候通常会用到虚拟机自带的工具，一般有命令行工具和可视化工具。 命令行工具   项目 价格 数量     计算机 \$1600 5   手机 \$12 12   管线 \$1 234       名称 主要作用     jps jvm process status tool,显示指定系统内所有的hotspot虚拟机进程   jstat　　　 jvm statistics monito">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习入门之常见机器学习算法简介">
-<meta property="og:url" content="https://aaronzhou-whu.github.io/机器学习入门之常见机器学习算法简介/index.html">
+<meta property="og:title" content="JDK监控和故障处理工具">
+<meta property="og:url" content="https://aaronzhou-whu.github.io/JDK监控和故障处理工具/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="写在前头：公司最近有个形态选股的项目，根据股票的历史数据，计算出k线相似的股票，并推荐给客户。要用到机器学习相关知识，刚好可以把研究生阶段所学的浅薄知识重拾起来，加以总结。 常见机器学习算法： 决策树（Decision Tree）：在进行逐步应答过程中，典型的决策树分析会使用分层变量或决策节点，例如，可将一个给定用户分类成信用可靠或不可靠。优点：擅长对人、地点、事物的一系列不同特征、品质、特性进行">
+<meta property="og:description" content="系统定位问题的时候通常会用到虚拟机自带的工具，一般有命令行工具和可视化工具。 命令行工具   项目 价格 数量     计算机 \$1600 5   手机 \$12 12   管线 \$1 234       名称 主要作用     jps jvm process status tool,显示指定系统内所有的hotspot虚拟机进程   jstat　　　 jvm statistics monito">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-23T15:45:07.000Z">
+<meta property="og:updated_time" content="2018-08-13T12:41:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机器学习入门之常见机器学习算法简介">
-<meta name="twitter:description" content="写在前头：公司最近有个形态选股的项目，根据股票的历史数据，计算出k线相似的股票，并推荐给客户。要用到机器学习相关知识，刚好可以把研究生阶段所学的浅薄知识重拾起来，加以总结。 常见机器学习算法： 决策树（Decision Tree）：在进行逐步应答过程中，典型的决策树分析会使用分层变量或决策节点，例如，可将一个给定用户分类成信用可靠或不可靠。优点：擅长对人、地点、事物的一系列不同特征、品质、特性进行">
+<meta name="twitter:title" content="JDK监控和故障处理工具">
+<meta name="twitter:description" content="系统定位问题的时候通常会用到虚拟机自带的工具，一般有命令行工具和可视化工具。 命令行工具   项目 价格 数量     计算机 \$1600 5   手机 \$12 12   管线 \$1 234       名称 主要作用     jps jvm process status tool,显示指定系统内所有的hotspot虚拟机进程   jstat　　　 jvm statistics monito">
 
 
 
@@ -114,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="https://aaronzhou-whu.github.io/机器学习入门之常见机器学习算法简介/"/>
+  <link rel="canonical" href="https://aaronzhou-whu.github.io/JDK监控和故障处理工具/"/>
 
 
 
 
 
-  <title>机器学习入门之常见机器学习算法简介 | BinYingの部屋</title>
+  <title>JDK监控和故障处理工具 | BinYingの部屋</title>
   
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/机器学习入门之常见机器学习算法简介/">
+    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/JDK监控和故障处理工具/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron Zhou">
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">机器学习入门之常见机器学习算法简介</h1>
+          <h1 class="post-title" itemprop="name headline">JDK监控和故障处理工具</h1>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-23T23:20:21+08:00">
-                2018-06-23 23:20:21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-13T20:27:54+08:00">
+                2018-08-13 20:27:54
               </time>
             
 
@@ -339,19 +339,70 @@
       
 
       
-        <p>写在前头：公司最近有个形态选股的项目，根据股票的历史数据，计算出k线相似的股票，并推荐给客户。要用到机器学习相关知识，刚好可以把研究生阶段所学的浅薄知识重拾起来，加以总结。</p>
-<h3 id="常见机器学习算法："><a href="#常见机器学习算法：" class="headerlink" title="常见机器学习算法："></a>常见机器学习算法：</h3><ol>
-<li>决策树（Decision Tree）：在进行逐步应答过程中，典型的决策树分析会使用分层变量或决策节点，例如，可将一个给定用户分类成信用可靠或不可靠。<br>优点：擅长对人、地点、事物的一系列不同特征、品质、特性进行评估<br>场景举例：基于规则的信用评估、赛马结果预测</li>
-<li>支持向量机（Support Vector Machine）：基于超平面（hyperplane），支持向量机可以对数据群进行分类。<br>优点：支持向量机擅长在变量 X 与其它变量之间进行二元分类操作，无论其关系是否是线性的<br>场景举例：新闻分类、手写识别。</li>
-<li>回归（Regression）：回归可以勾画出因变量与一个或多个因变量之间的状态关系。在这个例子中，将垃圾邮件和非垃圾邮件进行了区分。<br>优点：回归可用于识别变量之间的连续关系，即便这个关系不是非常明显<br>场景举例：路面交通流量分析、邮件过滤</li>
-<li>朴素贝叶斯分类（Naive Bayes Classification）：朴素贝叶斯分类器用于计算可能条件的分支概率。每个独立的特征都是「朴素」或条件独立的，因此它们不会影响别的对象。 例如，在一个装有共 5 个黄色和红色小球的罐子里，连续拿到两个黄色小球的概率是多少？从图中最上方分支可见，前后抓取两个黄色小球的概率为 1/10。朴素贝叶斯分类器可以计算多个特征的联合条件概率。<br>优点：对于在小数据集上有显著特征的相关对象，朴素贝叶斯方法可对其进行快速分类<br>场景举例：情感分析、消费者分类</li>
-<li>隐马尔可夫模型（Hidden Markov model）： 显马尔可夫过程是完全确定性的——一个给定的状态经常会伴随另一个状态。交通信号灯就是一个例子。相反，隐马尔可夫模型通过分析可见数据来计算隐藏状态的发生。随后，借助隐藏状态分析，隐马尔可夫模型可以估计可能的未来观察模式。在本例中，高或低气压的概率（这是隐藏状态）可用于预测晴天、雨天、多云天的概率。<br>优点：容许数据的变化性，适用于识别（recognition）和预测操作<br>场景举例：面部表情分析、气象预测</li>
-<li>随机森林（Random forest）：随机森林算法通过使用多个带有随机选取的数据子集的树（tree）改善了决策树的精确性。本例在基因表达层面上考察了大量与乳腺癌复发相关的基因，并计算出复发风险。<br>优点：随机森林方法被证明对大规模数据集和存在大量且有时不相关特征的项（item）来说很有用<br>场景举例：用户流失分析、风险评估时。</li>
-<li>K近邻（KNN K Nearest Neighbour）<br>版本一：在多维特征空间里，一个数据点的类别，与跟它最近的K个数据点的类别，是一样的概率很大。<br>版本二：如果要了解一个人是什么样的，最有可能从他身边的亲人，朋友，邻居的特性中找到答案。比如一个人的亲近的朋友都会打麻将，那么极大可能他也会打麻将。<br>版本三：“近朱者赤，近墨者黑”的概率大于“出淤泥而不染，浊清涟而不妖”。</li>
-<li>K均值（K-Means）<br>在特征空间中，随机选k个中心，其他所有点找到距离最近的中心，形成k个聚类。然后聚类的中心点成为空间中新的中心，其他所有点再次根据距离形成新的聚类。重复这个过程，直到中心不在变化时。</li>
-<li>卷积神经网络（convolutional neural network）：卷积是指来自后续层的权重的融合，可用于标记输出层。<br>优点：当存在非常大型的数据集、大量特征和复杂的分类任务时，卷积神经网络是非常有用的<br>场景举例：图像识别、文本转语音、药物发现</li>
-</ol>
-<h3 id="机器学习解决问题的的一般流程："><a href="#机器学习解决问题的的一般流程：" class="headerlink" title="机器学习解决问题的的一般流程："></a>机器学习解决问题的的一般流程：</h3><p>①选择数据：将你的数据分成三组：训练数据、验证数据和测试数据<br>②模型数据：使用训练数据来构建使用相关特征的模型<br>③验证模型：使用你的验证数据接入你的模型<br>④测试模型：使用你的测试数据检查被验证的模型的表现<br>⑤使用模型：使用完全训练好的模型在新数据上做预测<br>⑥调优模型：使用更多数据、不同的特征或调整过的参数来提升算法的性能表现</p>
+        <p>系统定位问题的时候通常会用到虚拟机自带的工具，一般有命令行工具和可视化工具。</p>
+<h3 id="命令行工具"><a href="#命令行工具" class="headerlink" title="命令行工具"></a>命令行工具</h3><table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">价格</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计算机</td>
+<td style="text-align:right">\$1600</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td>手机</td>
+<td style="text-align:right">\$12</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td>管线</td>
+<td style="text-align:right">\$1</td>
+<td style="text-align:center">234</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th style="text-align:left">主要作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>jps</td>
+<td style="text-align:left">jvm process status tool,显示指定系统内所有的hotspot虚拟机进程</td>
+</tr>
+<tr>
+<td>jstat　　　</td>
+<td style="text-align:left">jvm statistics monitoring tool,用于收集hotspot虚拟机各方面的运行数据</td>
+</tr>
+<tr>
+<td>jinfo　</td>
+<td style="text-align:left">configuration info for java，显示虚拟机配置信息</td>
+</tr>
+<tr>
+<td>jmap</td>
+<td style="text-align:left">memory map for java,生成虚拟机的内存转储快照（heapdump文件）</td>
+</tr>
+<tr>
+<td>jhat</td>
+<td style="text-align:left">jvm heap dump browser，用于分析heapmap文件，它会建立一个http/html服务器让用户可以在浏览器上查看分析结果</td>
+</tr>
+<tr>
+<td>jstack　</td>
+<td style="text-align:left">stack trace for java, 显示虚拟机的线程快照</td>
+</tr>
+</tbody>
+</table>
+<p><strong>jps：虚拟机进程状况工具</strong><br>可以列出正在运行的虚拟机进程，并显示虚拟机执行主类名称以及这些进程的本地虚拟机唯一ID。<br><strong>jstat：虚拟机统计信息监视工具</strong><br>jstat是用于监视虚拟机各种运行状态信息的命令行工具。它可以显示本地或者远程虚拟机进程中的类装载、内存、垃圾回收、JIT编译等运行数据。<br><strong>jinfo：java配置信息工具</strong><br>jinfo的作用是实时的查看和调整虚拟机各项参数。使用jps命令的-v参数可以查看虚拟机启动时显示指定的参数列表。<br><strong>jmap：java内存映像工具</strong><br>jmap命令用于生成堆转储快照。jmap的作用并不仅仅为了获取dump文件，它还可以查询finalize执行队列、java堆和永久代的详细信息。如空间使用率、当前用的是哪种收集器等。<br><strong>jhat：虚拟机堆转储快照分析工具</strong><br>Sun JDK提供jhat与jmap搭配使用，来分析dump生成的堆快照。jhat内置了一个微型的HTTP/HTML服务器，生成dump文件的分析结果后，可以在浏览器中查看。<br><strong>jstack：java堆栈跟踪工具</strong><br>jstack命令用于生成虚拟机当前时刻的线程快照。线程快照就是当前虚拟机内每一条线程正在执行的方法堆栈集合，生成线程快照的主要目的是定位线程出现长时间停顿的原因，如线程死锁、死循环、请求外部资源导致长时间等待等。</p>
+<h3 id="可视化行工具"><a href="#可视化行工具" class="headerlink" title="可视化行工具"></a>可视化行工具</h3><p><strong>JConsole</strong><br>JConsole工具在JDK/bin目录下，启动JConsole后，将自动搜索本机运行的jvm进程，不需要jps命令来查询指定。双击其中一个jvm进程即可开始监控，也可使用“远程进程”来连接远程服务器。</p>
+<p><strong>VisualVM</strong><br>VisualVM是一个集成多个JDK命令行工具的可视化工具。VisualVM基于NetBeans平台开发，它具备了插件扩展功能的特性，通过插件的扩展，可用于显示虚拟机进程及进程的配置和环境信息(jps，jinfo)，监视应用程序的CPU、GC、堆、方法区及线程的信息(jstat、jstack)等。VisualVM在JDK/bin目录下。</p>
 
       
     </div>
@@ -369,7 +420,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
           
         </div>
       
@@ -382,8 +433,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/二叉树相关算法题/" rel="next" title="二叉树相关算法题">
-                <i class="fa fa-chevron-left"></i> 二叉树相关算法题
+              <a href="/mybatis避坑总结（持续更新ing）/" rel="next" title="mybatis避坑总结（持续更新ing）">
+                <i class="fa fa-chevron-left"></i> mybatis避坑总结（持续更新ing）
               </a>
             
           </div>
@@ -391,10 +442,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/knn算法/" rel="prev" title="knn算法">
-                knn算法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -537,7 +584,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见机器学习算法："><span class="nav-number">1.</span> <span class="nav-text">常见机器学习算法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机器学习解决问题的的一般流程："><span class="nav-number">2.</span> <span class="nav-text">机器学习解决问题的的一般流程：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令行工具"><span class="nav-number">1.</span> <span class="nav-text">命令行工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可视化行工具"><span class="nav-number">2.</span> <span class="nav-text">可视化行工具</span></a></li></ol></div>
             
 
           </div>
