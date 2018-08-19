@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, zhizhi" />
+  <meta name="keywords" content="NIO," />
 
 
 
@@ -73,17 +73,18 @@
 
 
 
-<meta name="description" content="现在">
+<meta name="description" content="最近看很多分布式框架或者高并发框架，底层通信很多都是基于Netty，而Netty的核心又是NIO（NoneBlocking IO ），是非阻塞的。 NIO中最主要的是Buffer（缓冲）、Channel（通道）还有Selector（选择器，也叫多路复用器）。 Buffer使用 Native 函数库直接分配堆外内存，然后通过一个存储在 Java 堆的 DirectByteBuffer 对象作为这块内">
+<meta name="keywords" content="NIO">
 <meta property="og:type" content="article">
-<meta property="og:title" content="谈谈微服务架构">
-<meta property="og:url" content="https://aaronzhou-whu.github.io/谈谈微服务架构/index.html">
+<meta property="og:title" content="NIO小结（一）">
+<meta property="og:url" content="https://aaronzhou-whu.github.io/NIO小结（一）/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="现在">
+<meta property="og:description" content="最近看很多分布式框架或者高并发框架，底层通信很多都是基于Netty，而Netty的核心又是NIO（NoneBlocking IO ），是非阻塞的。 NIO中最主要的是Buffer（缓冲）、Channel（通道）还有Selector（选择器，也叫多路复用器）。 Buffer使用 Native 函数库直接分配堆外内存，然后通过一个存储在 Java 堆的 DirectByteBuffer 对象作为这块内">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-16T09:08:30.000Z">
+<meta property="og:updated_time" content="2018-08-19T15:28:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="谈谈微服务架构">
-<meta name="twitter:description" content="现在">
+<meta name="twitter:title" content="NIO小结（一）">
+<meta name="twitter:description" content="最近看很多分布式框架或者高并发框架，底层通信很多都是基于Netty，而Netty的核心又是NIO（NoneBlocking IO ），是非阻塞的。 NIO中最主要的是Buffer（缓冲）、Channel（通道）还有Selector（选择器，也叫多路复用器）。 Buffer使用 Native 函数库直接分配堆外内存，然后通过一个存储在 Java 堆的 DirectByteBuffer 对象作为这块内">
 
 
 
@@ -113,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="https://aaronzhou-whu.github.io/谈谈微服务架构/"/>
+  <link rel="canonical" href="https://aaronzhou-whu.github.io/NIO小结（一）/"/>
 
 
 
 
 
-  <title>谈谈微服务架构 | BinYingの部屋</title>
+  <title>NIO小结（一） | BinYingの部屋</title>
   
 
 
@@ -266,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/谈谈微服务架构/">
+    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/NIO小结（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron Zhou">
@@ -283,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">谈谈微服务架构</h1>
+          <h1 class="post-title" itemprop="name headline">NIO小结（一）</h1>
         
 
         <div class="post-meta">
@@ -295,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-08T23:30:21+08:00">
-                2018-03-08 23:30:21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T22:57:29+08:00">
+                2018-08-19 22:57:29
               </time>
             
 
@@ -338,7 +339,11 @@
       
 
       
-        <p>现在</p>
+        <p>最近看很多分布式框架或者高并发框架，底层通信很多都是基于Netty，而Netty的核心又是NIO（<em>NoneBlocking IO</em> ），是非阻塞的。</p>
+<p>NIO中最主要的是Buffer（缓冲）、Channel（通道）还有Selector（选择器，也叫多路复用器）。</p>
+<p><strong>Buffer</strong>使用 Native 函数库直接分配堆外内存，然后通过一个存储在 Java 堆的 DirectByteBuffer 对象作为这块内存的引用进行操作，避免了在 Java 堆和 Native 堆中来回复制数据。在BIO（阻塞IO）中，等待IO的线程必须被阻塞，这样效率会很低，引入Buffer缓冲区，当数据到达时，可以预先被写入缓冲区，再由缓冲区交给线程，因此线程无需阻塞地等待IO。</p>
+<p><strong>Channel</strong>是数据流通的通道，前面提到的Buffer只是数据的缓冲区，那么数据从哪里来以及到哪里去，都会经过一个流通通道。Channel 是对数据的源头和数据目标点流经途径的抽象，在这个意义上和InputStream和OutputStream类似。Buffer和Channel都是配合使用的。</p>
+<p><strong>Selector</strong>，很多高并发通信框架为何可以做到高并发，就是基于selector这种多路复用原理，一个线程可以负责多个channel。首先创建一个elector，然后将channel注册到selector，最后调用 select() 方法获取通道信息，用于判断是否有我们感兴趣的事件已经发生。</p>
 
       
     </div>
@@ -354,6 +359,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/NIO/" rel="tag"># NIO</a>
+          
+        </div>
+      
 
       
       
@@ -363,8 +374,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Java中间件之我的浅显理解/" rel="next" title="Java中间件之我的浅显理解">
-                <i class="fa fa-chevron-left"></i> Java中间件之我的浅显理解
+              <a href="/JDK监控和故障处理工具/" rel="next" title="JDK监控和故障处理工具">
+                <i class="fa fa-chevron-left"></i> JDK监控和故障处理工具
               </a>
             
           </div>
@@ -372,10 +383,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/消息中间件/" rel="prev" title="消息中间件">
-                消息中间件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://aaronzhou-whu.github.io/"/>
-  <updated>2018-08-13T12:41:38.000Z</updated>
+  <updated>2018-08-19T15:28:46.000Z</updated>
   <id>https://aaronzhou-whu.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NIO小结（一）</title>
+    <link href="https://aaronzhou-whu.github.io/NIO%E5%B0%8F%E7%BB%93%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>https://aaronzhou-whu.github.io/NIO小结（一）/</id>
+    <published>2018-08-19T14:57:29.000Z</published>
+    <updated>2018-08-19T15:28:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近看很多分布式框架或者高并发框架，底层通信很多都是基于Netty，而Netty的核心又是NIO（<em>NoneBlocking IO</em> ），是非阻塞的。</p><p>NIO中最主要的是Buffer（缓冲）、Channel（通道）还有Selector（选择器，也叫多路复用器）。</p><p><strong>Buffer</strong>使用 Native 函数库直接分配堆外内存，然后通过一个存储在 Java 堆的 DirectByteBuffer 对象作为这块内存的引用进行操作，避免了在 Java 堆和 Native 堆中来回复制数据。在BIO（阻塞IO）中，等待IO的线程必须被阻塞，这样效率会很低，引入Buffer缓冲区，当数据到达时，可以预先被写入缓冲区，再由缓冲区交给线程，因此线程无需阻塞地等待IO。</p><p><strong>Channel</strong>是数据流通的通道，前面提到的Buffer只是数据的缓冲区，那么数据从哪里来以及到哪里去，都会经过一个流通通道。Channel 是对数据的源头和数据目标点流经途径的抽象，在这个意义上和InputStream和OutputStream类似。Buffer和Channel都是配合使用的。</p><p><strong>Selector</strong>，很多高并发通信框架为何可以做到高并发，就是基于selector这种多路复用原理，一个线程可以负责多个channel。首先创建一个elector，然后将channel注册到selector，最后调用 select() 方法获取通道信息，用于判断是否有我们感兴趣的事件已经发生。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近看很多分布式框架或者高并发框架，底层通信很多都是基于Netty，而Netty的核心又是NIO（&lt;em&gt;NoneBlocking IO&lt;/em&gt; ），是非阻塞的。&lt;/p&gt;
+&lt;p&gt;NIO中最主要的是Buffer（缓冲）、Channel（通道）还有Selector（选择器，也
+      
+    
+    </summary>
+    
+    
+      <category term="NIO" scheme="https://aaronzhou-whu.github.io/tags/NIO/"/>
+    
+  </entry>
   
   <entry>
     <title>JDK监控和故障处理工具</title>
@@ -440,27 +464,6 @@
 &lt;li&gt;&lt;p&gt;try catch finally语句块中含有return时的执行顺序：finally会在try代码块的return之前执行&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;try中的return如果是普通变量，则finally语句块中对该变量的修改并不会影响到最终的r
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>linux系统上程序OOM问题排查与解决方案</title>
-    <link href="https://aaronzhou-whu.github.io/linux%E7%B3%BB%E7%BB%9F%E4%B8%8A%E7%A8%8B%E5%BA%8FOOM%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/"/>
-    <id>https://aaronzhou-whu.github.io/linux系统上程序OOM问题排查/</id>
-    <published>2018-02-26T15:10:00.000Z</published>
-    <updated>2018-03-05T16:04:47.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Linux上的redis服务器，写数据时发现数据写的不完整，很多没写进去，看日子发现报错：SocketException: Broken pipe (Write failed) ，这种错误一般都是redis挂掉了吧，重启redis，重复执行程序，还是会报错，调试代码，运行少量数据（任然是多线程起任务），发现可以完整写入，那应该不是并发的问题，单机redis挂掉，不是因为并发引起的阻塞timeout，那很有可能是空间不足了，毕竟是测试环境，硬件一般。检查redis的配置文件，找到rdb备份文件，du命令查看占用的存储空间，发现果然满了，去/var/log/message下查看系统日志，找到了“kernel: Out of memory: Kill process”字样。</p><p>du命令查看发现home目录空间严重不足，解决方法一是关闭redis持久化，这种方法在实际应用时是不可取的，只是在测试环境中作为一个临时方案；二是把redis的备份文件目录设置到其他大的空间目录下。</p><p>总的来说，单机redis问题多多，稳定性太差，可以使用基于redis集群方案实现的codis。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Linux上的redis服务器，写数据时发现数据写的不完整，很多没写进去，看日子发现报错：SocketException: Broken pipe (Write failed) ，这种错误一般都是redis挂掉了吧，重启redis，重复执行程序，还是会报错，调试代码，运行少
       
     
     </summary>
