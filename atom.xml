@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://aaronzhou-whu.github.io/"/>
-  <updated>2018-08-19T15:28:46.000Z</updated>
+  <updated>2018-08-21T12:57:14.000Z</updated>
   <id>https://aaronzhou-whu.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NIO（二）</title>
+    <link href="https://aaronzhou-whu.github.io/NIO%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
+    <id>https://aaronzhou-whu.github.io/NIO（二）/</id>
+    <published>2018-08-21T10:33:50.000Z</published>
+    <updated>2018-08-21T12:57:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>这篇主要记录一些Buffer相关知识点。</p><h3 id="Buffer中的三个重要属性："><a href="#Buffer中的三个重要属性：" class="headerlink" title="Buffer中的三个重要属性："></a>Buffer中的三个重要属性：</h3><blockquote><ul><li>capacity</li><li>position</li><li>limit</li></ul></blockquote><p>position和limit的含义取决于Buffer处在读模式还是写模式。不管Buffer处在什么模式，capacity的含义总是一样的。</p><p><strong>capacity</strong> 作为一个内存块，Buffer有一个固定的大小值，也叫“capacity”.你只能往里写capacity个byte、long，char等类型。一旦Buffer满了，需要将其清空（通过读数据或者清除数据）才能继续写数据往里写数据。</p><p><strong>position</strong> 当你写数据到Buffer中时，position表示当前的位置。初始的position值为0.当一个byte、long等数据写到Buffer后， position会向前移动到下一个可插入数据的Buffer单元。position最大可为capacity – 1。</p><p><strong>limit</strong> 在写模式下，Buffer的limit表示你最多能往Buffer里写多少数据。 写模式下，limit等于Buffer的capacity。当切换Buffer到读模式时， limit表示你最多能读到多少数据。因此，当切换Buffer到读模式时，limit会被设置成写模式下的position值。换句话说，你能读到之前写入的所有数据（limit被设置成已写数据的数量，这个值在写模式下就是position）。</p><p><strong>mark</strong> 下一个要被读或写的元素的索引。位置会自动由相应的 get( )和 put( )函数更新一个备忘位置。调用 mark( )来设定 mark = postion。调用 reset( )设定 position =mark。标记在设定前是未定义的(undefined)。这四个属性之间总是遵循以下关系：0 &lt;= mark &lt;= position &lt;= limit &lt;= capacity 。</p><h3 id="Buffer的类型"><a href="#Buffer的类型" class="headerlink" title="Buffer的类型"></a>Buffer的类型</h3><p>Java NIO 有以下Buffer类型：</p><blockquote><ul><li>ByteBuffer</li><li>CharBuffer</li><li>DoubleBuffer</li><li>FloatBuffer</li><li>IntBuffer</li><li>LongBuffer</li><li>ShortBuffer</li></ul></blockquote><p>不包含StringBuffer和BooleanBuffer，StringBuffer在lang包下面。用的最多的还是ByteBuffer。</p><h3 id="Buffer的基本用法"><a href="#Buffer的基本用法" class="headerlink" title="Buffer的基本用法"></a>Buffer的基本用法</h3><p>使用Buffer读写数据一般遵循以下四个步骤：</p><blockquote><ul><li>写入数据到Buffer</li><li>调用flip()方法</li><li>从Buffer中读取数据</li><li>调用clear()方法或者compact()方法</li></ul></blockquote><p>flip方法将Buffer从写模式切换到读模式。调用flip()方法会将position设回0，并将limit设置成之前position的值。</p><p>(TBC…)</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这篇主要记录一些Buffer相关知识点。&lt;/p&gt;
+&lt;h3 id=&quot;Buffer中的三个重要属性：&quot;&gt;&lt;a href=&quot;#Buffer中的三个重要属性：&quot; class=&quot;headerlink&quot; title=&quot;Buffer中的三个重要属性：&quot;&gt;&lt;/a&gt;Buffer中的三个重要属
+      
+    
+    </summary>
+    
+    
+      <category term="NIO" scheme="https://aaronzhou-whu.github.io/tags/NIO/"/>
+    
+  </entry>
   
   <entry>
     <title>NIO小结（一）</title>
@@ -440,30 +464,6 @@
         &lt;p&gt;中间件（middleware），从字面上来看，是不同的系统或程序之间的中间人，是一种交互媒介（通道），中间件屏蔽了各自的细节，方便不同的系统更加关注于彼此的业务。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;百度百科上的解释：中间件是一种独立的系统软件或服务程序，分布式应用软件
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>异常处理小结</title>
-    <link href="https://aaronzhou-whu.github.io/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%B0%8F%E7%BB%93/"/>
-    <id>https://aaronzhou-whu.github.io/异常处理小结/</id>
-    <published>2018-03-06T15:01:12.000Z</published>
-    <updated>2018-03-07T11:44:15.000Z</updated>
-    
-    <content type="html"><![CDATA[<ol><li><p>try catch finally语句块中含有return时的执行顺序：finally会在try代码块的return之前执行</p></li><li><p>try中的return如果是普通变量，则finally语句块中对该变量的修改并不会影响到最终的return值；如果是对象类型，则会影响</p></li><li><p>finally中如果有return语句，则会覆盖掉之前的return返回值</p></li><li><p>如果catch块中捕获了异常, 并且在catch块中将该异常throw给上级调用者进行处理, 但finally中return了, 那么catch块中的throw就失效了, 上级方法调用者是捕获不到异常的–<strong>finally中的return会覆盖掉catch中抛出的异常</strong></p></li><li><p>1.6中catch throw e并且函数要throws Exception，而1.8中只需在catch中throw即可</p></li><li><p>参考链接<a href="https://www.jianshu.com/p/36692cb517bc" target="_blank" rel="noopener">https://www.jianshu.com/p/36692cb517bc</a></p></li><li>参考链接<a href="https://www.cnblogs.com/wyisprogramming/p/6610950.html" target="_blank" rel="noopener">https://www.cnblogs.com/wyisprogramming/p/6610950.html</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;try catch finally语句块中含有return时的执行顺序：finally会在try代码块的return之前执行&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;try中的return如果是普通变量，则finally语句块中对该变量的修改并不会影响到最终的r
       
     
     </summary>
