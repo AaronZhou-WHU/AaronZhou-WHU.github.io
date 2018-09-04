@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, zhizhi" />
+  <meta name="keywords" content="Redis," />
 
 
 
@@ -73,17 +73,18 @@
 
 
 
-<meta name="description" content="大数据处理框架比较常见的又hadoop、spark以及storm。Hadoop是基于HDFS的，数据都存储在磁盘上，io开销比较大；storm是基于内存的，使用zeroMQ消息中间件传递消息，速度比较快。   Hadoop M/R基于HDFS，需要切分输入数据、产生中间数据文件、排序、数据压缩、多份复制等，效率较低。 Storm 基于ZeroMQ高性能的消息中间件，不持久化数据，效率高。 Spar">
+<meta name="description" content="缓存预热缓存预热就是系统上线后，将相关的缓存数据直接加载到缓存系统。这样避免，用户请求的时候，再去加载相关的数据。解决思路：  直接写个缓存刷新页面，上线时手工操作下。 数据量不大，可以在WEB系统启动的时候加载。 定时刷新缓存。  缓存更新缓存淘汰的策略有两种：  定时去清理过期的缓存。 当有用户请求过来时，再判断这个请求所用到的缓存是否过期，过期的话就去底层系统得到新数据并更新缓存。   两者">
+<meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="大数据处理框架简介">
-<meta property="og:url" content="https://aaronzhou-whu.github.io/流式计算框架/index.html">
+<meta property="og:title" content="redis缓存相关总结">
+<meta property="og:url" content="https://aaronzhou-whu.github.io/redis缓存相关总结/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="大数据处理框架比较常见的又hadoop、spark以及storm。Hadoop是基于HDFS的，数据都存储在磁盘上，io开销比较大；storm是基于内存的，使用zeroMQ消息中间件传递消息，速度比较快。   Hadoop M/R基于HDFS，需要切分输入数据、产生中间数据文件、排序、数据压缩、多份复制等，效率较低。 Storm 基于ZeroMQ高性能的消息中间件，不持久化数据，效率高。 Spar">
+<meta property="og:description" content="缓存预热缓存预热就是系统上线后，将相关的缓存数据直接加载到缓存系统。这样避免，用户请求的时候，再去加载相关的数据。解决思路：  直接写个缓存刷新页面，上线时手工操作下。 数据量不大，可以在WEB系统启动的时候加载。 定时刷新缓存。  缓存更新缓存淘汰的策略有两种：  定时去清理过期的缓存。 当有用户请求过来时，再判断这个请求所用到的缓存是否过期，过期的话就去底层系统得到新数据并更新缓存。   两者">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-16T07:52:50.000Z">
+<meta property="og:updated_time" content="2018-09-04T12:09:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="大数据处理框架简介">
-<meta name="twitter:description" content="大数据处理框架比较常见的又hadoop、spark以及storm。Hadoop是基于HDFS的，数据都存储在磁盘上，io开销比较大；storm是基于内存的，使用zeroMQ消息中间件传递消息，速度比较快。   Hadoop M/R基于HDFS，需要切分输入数据、产生中间数据文件、排序、数据压缩、多份复制等，效率较低。 Storm 基于ZeroMQ高性能的消息中间件，不持久化数据，效率高。 Spar">
+<meta name="twitter:title" content="redis缓存相关总结">
+<meta name="twitter:description" content="缓存预热缓存预热就是系统上线后，将相关的缓存数据直接加载到缓存系统。这样避免，用户请求的时候，再去加载相关的数据。解决思路：  直接写个缓存刷新页面，上线时手工操作下。 数据量不大，可以在WEB系统启动的时候加载。 定时刷新缓存。  缓存更新缓存淘汰的策略有两种：  定时去清理过期的缓存。 当有用户请求过来时，再判断这个请求所用到的缓存是否过期，过期的话就去底层系统得到新数据并更新缓存。   两者">
 
 
 
@@ -113,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="https://aaronzhou-whu.github.io/流式计算框架/"/>
+  <link rel="canonical" href="https://aaronzhou-whu.github.io/redis缓存相关总结/"/>
 
 
 
 
 
-  <title>大数据处理框架简介 | BinYingの部屋</title>
+  <title>redis缓存相关总结 | BinYingの部屋</title>
   
 
 
@@ -266,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/流式计算框架/">
+    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/redis缓存相关总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron Zhou">
@@ -283,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">大数据处理框架简介</h1>
+          <h1 class="post-title" itemprop="name headline">redis缓存相关总结</h1>
         
 
         <div class="post-meta">
@@ -295,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T22:49:45+08:00">
-                2018-03-10 22:49:45
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-04T20:09:04+08:00">
+                2018-09-04 20:09:04
               </time>
             
 
@@ -338,15 +339,26 @@
       
 
       
-        <p>大数据处理框架比较常见的又hadoop、spark以及storm。Hadoop是基于HDFS的，数据都存储在磁盘上，io开销比较大；storm是基于内存的，使用zeroMQ消息中间件传递消息，速度比较快。</p>
-<blockquote>
+        <h3 id="缓存预热"><a href="#缓存预热" class="headerlink" title="缓存预热"></a>缓存预热</h3><p>缓存预热就是系统上线后，将相关的缓存数据直接加载到缓存系统。这样避免，用户请求的时候，再去加载相关的数据。<br>解决思路：</p>
 <ul>
-<li>Hadoop M/R基于HDFS，需要切分输入数据、产生中间数据文件、排序、数据压缩、多份复制等，效率较低。</li>
-<li>Storm 基于ZeroMQ高性能的消息中间件，不持久化数据，效率高。</li>
-<li>Spark基于Map Reduce算法实现的分布式计算，拥有Hadoop MapReduce所具有的优点，但不同于MapReduce的是Job中间输出和结果可以保存在内存中，从而不再需要读写HDFS，因此Spark能更好地适用于数据挖掘与机器学习等需要迭代的Map Reduce的算法</li>
+<li>直接写个缓存刷新页面，上线时手工操作下。</li>
+<li>数据量不大，可以在WEB系统启动的时候加载。</li>
+<li>定时刷新缓存。</li>
 </ul>
-</blockquote>
-<p>Hadoop适合于离线的批量数据处理适用于对实时性要求极低的场景;Storm适合于实时流数据处理，实时性方面做得极好;Spark介于二者之间，批处理方面性能优于Map-Reduce，（Spark streaming）流处理目前弱于Storm。</p>
+<h3 id="缓存更新"><a href="#缓存更新" class="headerlink" title="缓存更新"></a>缓存更新</h3><p>缓存淘汰的策略有两种：</p>
+<ul>
+<li>定时去清理过期的缓存。</li>
+<li>当有用户请求过来时，再判断这个请求所用到的缓存是否过期，过期的话就去底层系统得到新数据并更新缓存。 </li>
+</ul>
+<p>两者各有优劣，第一种的缺点是维护大量缓存的key是比较麻烦的，第二种的缺点就是每次用户请求过来都要判断缓存失效，逻辑相对比较复杂，具体用哪种方案，大家可以根据自己的应用场景来权衡。1. 预估失效时间2.版本号（必须单调递增，时间戳是最好的选择）3.提供手动清理缓存的接口。</p>
+<h3 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h3><p>缓存穿透是指查询一个<strong>不存在的数据</strong>，由于缓存是不命中时需要从数据库查询，查不到数据则不写入缓存，这将导致这个不存在的数据每次请求都要到数据库去查询，造成缓存穿透。</p>
+<h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><p>当缓存服务器重启或者大量缓存集中在某一个时间段失效，所有的查询都落在数据库上，造成了缓存雪崩。</p>
+<ul>
+<li>在缓存失效后，通过加锁或者队列来控制读数据库写缓存的线程数量。比如对某个key只允许一个线程查询数据和写缓存，其他线程等待。</li>
+<li>可以通过缓存reload机制，预先去更新缓存，再即将发生大并发访问前手动触发加载缓存</li>
+<li>不同的key，设置不同的过期时间，让缓存失效的时间点尽量均匀</li>
+<li>做二级缓存，或者双缓存策略。A1为原始缓存，A2为拷贝缓存，A1失效时，可以访问A2，A1缓存失效时间设置为短期，A2设置为长期。</li>
+</ul>
 
       
     </div>
@@ -362,6 +374,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+        </div>
+      
 
       
       
@@ -371,8 +389,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/消息中间件/" rel="next" title="消息中间件">
-                <i class="fa fa-chevron-left"></i> 消息中间件
+              <a href="/二叉树相关算法题（续）/" rel="next" title="二叉树相关算法题（续）">
+                <i class="fa fa-chevron-left"></i> 二叉树相关算法题（续）
               </a>
             
           </div>
@@ -380,10 +398,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/Dubbo学习笔记（一）/" rel="prev" title="Dubbo学习笔记（一）">
-                Dubbo学习笔记（一） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -435,8 +449,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -507,6 +530,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存预热"><span class="nav-number">1.</span> <span class="nav-text">缓存预热</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存更新"><span class="nav-number">2.</span> <span class="nav-text">缓存更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存穿透"><span class="nav-number">3.</span> <span class="nav-text">缓存穿透</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存雪崩"><span class="nav-number">4.</span> <span class="nav-text">缓存雪崩</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
