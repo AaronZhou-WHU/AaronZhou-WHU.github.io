@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://aaronzhou-whu.github.io/"/>
-  <updated>2018-09-04T12:09:47.000Z</updated>
+  <updated>2018-09-11T15:22:00.000Z</updated>
   <id>https://aaronzhou-whu.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>TCP粘包问题</title>
+    <link href="https://aaronzhou-whu.github.io/TCP%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/"/>
+    <id>https://aaronzhou-whu.github.io/TCP粘包问题/</id>
+    <published>2018-09-11T15:04:59.000Z</published>
+    <updated>2018-09-11T15:22:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天面试的时候，面试问了一个TCP粘包的问题，说实话还是第一次听到这个词汇，怪自己网络方面的编程还是积累少了。</p><p>先来回顾一下计算机网络的知识 ——<br><strong>TCP</strong> 为了保证可靠传输，尽量减少额外开销（每次发包都要验证），因此采用了流式传输，面向流的传输，相对于面向消息的传输，可以减少发送包的数量，从而减少了额外开销。但是，对于数据传输频繁的程序来讲，使用TCP可能会容易粘包。当然，对接收端的程序来讲，如果机器负荷很重，也会在接收缓冲里粘包。这样，就需要接收端额外拆包，增加了工作量。因此，这个特别适合的是数据要求可靠传输，但是不需要太频繁传输的场合。</p><p><strong>UDP</strong> 由于面向的是消息传输，它把所有接收到的消息都挂接到缓冲区的接受队列中，因此，它对于数据的提取分离就更加方便，但是，它没有粘包机制，因此，当发送数据量较小的时候，就会发生数据包有效载荷较小的情况，也会增加多次发送的系统发送开销（系统调用，写硬件等）和接收开销。</p><h3 id="什么是粘包现象"><a href="#什么是粘包现象" class="headerlink" title="什么是粘包现象"></a>什么是粘包现象</h3><p>TCP粘包是指发送方发送的若干包数据到接收方接收时粘成一包，从接收缓冲区看，后一包数据的头紧接着前一包数据的尾。</p><h3 id="粘包出现原因"><a href="#粘包出现原因" class="headerlink" title="粘包出现原因"></a>粘包出现原因</h3><ul><li>发送端需要等缓冲区满才发送出去，造成粘包</li><li>接收方不及时接收缓冲区的包，造成多个包接收</li></ul><p>具体点来说：<br><strong>发送方原因</strong><br>TCP默认会使用Nagle算法。而Nagle算法主要做两件事：1）只有上一个分组得到确认，才会发送下一个分组；2）收集多个小分组，在一个确认到来时一起发送。<br>所以，正是Nagle算法造成了发送方有可能造成粘包现象。</p><p><strong>接收方原因</strong><br>TCP接收到分组时，并不会立刻送至应用层处理，或者说，应用层并不一定会立即处理；实际上，TCP将收到的分组保存至接收缓存里，然后应用程序主动从缓存里读收到的分组。这样一来，如果TCP接收分组的速度大于应用程序读分组的速度，多个包就会被存至缓存，应用程序读时，就会读到多个首尾相接粘到一起的包。</p><p>粘包情况有两种，一种是粘在一起的包都是完整的数据包，另一种情况是粘在一起的包有不完整的包。</p><p>不是所有的粘包现象都需要处理，若传输的数据为不带结构的连续流数据（如文件传输），则不必把粘连的包分开（简称分包）。但在实际工程应用中，传输的数据一般为带结构的数据，这时就需要做分包处理。</p><h3 id="处理粘包现象"><a href="#处理粘包现象" class="headerlink" title="处理粘包现象"></a>处理粘包现象</h3><p>发送方<br>对于发送方造成的粘包现象，我们可以通过关闭Nagle算法来解决，使用TCP_NODELAY选项来关闭Nagle算法。TCP提供了强制数据立即传送的操作指令push，TCP软件收到该操作指令后，就立即将本段数据发送出去，而不必等待发送缓冲区满。</p><p>接收方<br>TCP并没有处理接收方粘包现象的机制，我们只能在应用层进行处理。</p><p>应用层处理<br>应用层的处理简单易行！并且不仅可以解决接收方造成的粘包问题，还能解决发送方造成的粘包问题。</p><p>解决方法就是循环处理：应用程序在处理从缓存读来的分组时，读完一条数据时，就应该循环读下一条数据，直到所有的数据都被处理；但是如何判断每条数据的长度呢？</p><p>两种途径：<br>1.格式化数据：每条数据有固定的格式（开始符、结束符），这种方法简单易行，但选择开始符和结束符的时候一定要注意每条数据的内部一定不能出现开始符或结束符；<br>2.发送长度：发送每条数据的时候，将数据的长度一并发送，比如可以选择每条数据的前4位是数据的长度，应用层处理时可以根据长度来判断每条数据的开始和结束。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;今天面试的时候，面试问了一个TCP粘包的问题，说实话还是第一次听到这个词汇，怪自己网络方面的编程还是积累少了。&lt;/p&gt;
+&lt;p&gt;先来回顾一下计算机网络的知识 ——&lt;br&gt;&lt;strong&gt;TCP&lt;/strong&gt; 为了保证可靠传输，尽量减少额外开销（每次发包都要验证），因此采用
+      
+    
+    </summary>
+    
+    
+      <category term="TCP" scheme="https://aaronzhou-whu.github.io/tags/TCP/"/>
+    
+  </entry>
   
   <entry>
     <title>redis缓存相关总结</title>
@@ -445,27 +469,6 @@
 &lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;Hadoop M
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>消息中间件</title>
-    <link href="https://aaronzhou-whu.github.io/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
-    <id>https://aaronzhou-whu.github.io/消息中间件/</id>
-    <published>2018-03-09T15:13:34.000Z</published>
-    <updated>2018-03-12T15:50:48.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>在分布式系统中，不同的应用之间需要传递和接收消息（message），消息中间件就是为了解决分布式系统之间的通信。它的异步性方便了对系统进行解耦。<br>在Java邻域，熟知的有JMS（Java Message Service），Java消息服务是一个Java平台中关于面向消息中间件（Message oriented middleware,MOM）的API，用于在两个应用程序之间，或分布式系统中发送消息，进行异步通信。 </p><p>在JMS中，有queue和topic两种模型，点对点（point to point， queue）与发布订阅（publish/subscribe，topic），这两种模式主要区别或解决的问题就是发送到队列的消息能否重复消费(多订阅)。</p><p>目前市面上使用较多的消息队列有ActiveMQ，RabbitMQ，ZeroMQ，Kafka，MetaMQ，RocketMQ等。对比如下：<br><img src="http://img.blog.csdn.net/20171027100748177?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzEyMzYzNQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>kafka有别于JMS规范或其他分布式消息系统的不同之一，kafka支持将消息持久化处理。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;在分布式系统中，不同的应用之间需要传递和接收消息（message），消息中间件就是为了解决分布式系统之间的通信。它的异步性方便了对系统进行解耦。&lt;br&gt;在Java邻域，熟知的有JMS（Java Message Service），Java消息服务是一个Java平台中关于面向消
       
     
     </summary>
