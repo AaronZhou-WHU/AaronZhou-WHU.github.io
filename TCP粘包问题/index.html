@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="今天面试的时候，面试问了一个TCP粘包的问题，说实话还是第一次听到这个词汇，怪自己网络方面的编程还是积累少了。 先来回顾一下计算机网络的知识 ——TCP 为了保证可靠传输，尽量减少额外开销（每次发包都要验证），因此采用了流式传输，面向流的传输，相对于面向消息的传输，可以减少发送包的数量，从而减少了额外开销。但是，对于数据传输频繁的程序来讲，使用TCP可能会容易粘包。当然，对接收端的程序来讲，如果机">
+<meta name="description" content="今天面试的时候，面试问了一个TCP粘包的问题，说实话还是第一次听到这个词汇，怪自己网络方面的编程还是积累少了。还好在面试官的提示下，答出了一点点… 先来回顾一下计算机网络的知识 ——TCP 为了保证可靠传输，尽量减少额外开销（每次发包都要验证），因此采用了流式传输，面向流的传输，相对于面向消息的传输，可以减少发送包的数量，从而减少了额外开销。但是，对于数据传输频繁的程序来讲，使用TCP可能会容易粘">
 <meta name="keywords" content="TCP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCP粘包问题">
 <meta property="og:url" content="https://aaronzhou-whu.github.io/TCP粘包问题/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="今天面试的时候，面试问了一个TCP粘包的问题，说实话还是第一次听到这个词汇，怪自己网络方面的编程还是积累少了。 先来回顾一下计算机网络的知识 ——TCP 为了保证可靠传输，尽量减少额外开销（每次发包都要验证），因此采用了流式传输，面向流的传输，相对于面向消息的传输，可以减少发送包的数量，从而减少了额外开销。但是，对于数据传输频繁的程序来讲，使用TCP可能会容易粘包。当然，对接收端的程序来讲，如果机">
+<meta property="og:description" content="今天面试的时候，面试问了一个TCP粘包的问题，说实话还是第一次听到这个词汇，怪自己网络方面的编程还是积累少了。还好在面试官的提示下，答出了一点点… 先来回顾一下计算机网络的知识 ——TCP 为了保证可靠传输，尽量减少额外开销（每次发包都要验证），因此采用了流式传输，面向流的传输，相对于面向消息的传输，可以减少发送包的数量，从而减少了额外开销。但是，对于数据传输频繁的程序来讲，使用TCP可能会容易粘">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-11T15:22:00.000Z">
+<meta property="og:updated_time" content="2018-09-12T00:41:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP粘包问题">
-<meta name="twitter:description" content="今天面试的时候，面试问了一个TCP粘包的问题，说实话还是第一次听到这个词汇，怪自己网络方面的编程还是积累少了。 先来回顾一下计算机网络的知识 ——TCP 为了保证可靠传输，尽量减少额外开销（每次发包都要验证），因此采用了流式传输，面向流的传输，相对于面向消息的传输，可以减少发送包的数量，从而减少了额外开销。但是，对于数据传输频繁的程序来讲，使用TCP可能会容易粘包。当然，对接收端的程序来讲，如果机">
+<meta name="twitter:description" content="今天面试的时候，面试问了一个TCP粘包的问题，说实话还是第一次听到这个词汇，怪自己网络方面的编程还是积累少了。还好在面试官的提示下，答出了一点点… 先来回顾一下计算机网络的知识 ——TCP 为了保证可靠传输，尽量减少额外开销（每次发包都要验证），因此采用了流式传输，面向流的传输，相对于面向消息的传输，可以减少发送包的数量，从而减少了额外开销。但是，对于数据传输频繁的程序来讲，使用TCP可能会容易粘">
 
 
 
@@ -339,7 +339,7 @@
       
 
       
-        <p>今天面试的时候，面试问了一个TCP粘包的问题，说实话还是第一次听到这个词汇，怪自己网络方面的编程还是积累少了。</p>
+        <p>今天面试的时候，面试问了一个TCP粘包的问题，说实话还是第一次听到这个词汇，怪自己网络方面的编程还是积累少了。还好在面试官的提示下，答出了一点点…</p>
 <p>先来回顾一下计算机网络的知识 ——<br><strong>TCP</strong> 为了保证可靠传输，尽量减少额外开销（每次发包都要验证），因此采用了流式传输，面向流的传输，相对于面向消息的传输，可以减少发送包的数量，从而减少了额外开销。但是，对于数据传输频繁的程序来讲，使用TCP可能会容易粘包。当然，对接收端的程序来讲，如果机器负荷很重，也会在接收缓冲里粘包。这样，就需要接收端额外拆包，增加了工作量。因此，这个特别适合的是数据要求可靠传输，但是不需要太频繁传输的场合。</p>
 <p><strong>UDP</strong> 由于面向的是消息传输，它把所有接收到的消息都挂接到缓冲区的接受队列中，因此，它对于数据的提取分离就更加方便，但是，它没有粘包机制，因此，当发送数据量较小的时候，就会发生数据包有效载荷较小的情况，也会增加多次发送的系统发送开销（系统调用，写硬件等）和接收开销。</p>
 <h3 id="什么是粘包现象"><a href="#什么是粘包现象" class="headerlink" title="什么是粘包现象"></a>什么是粘包现象</h3><p>TCP粘包是指发送方发送的若干包数据到接收方接收时粘成一包，从接收缓冲区看，后一包数据的头紧接着前一包数据的尾。</p>
@@ -395,6 +395,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/一致性协议之2PC/" rel="prev" title="一致性协议之2PC">
+                一致性协议之2PC <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -475,7 +479,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -488,7 +492,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
