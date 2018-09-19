@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://aaronzhou-whu.github.io/"/>
-  <updated>2018-09-16T16:31:20.000Z</updated>
+  <updated>2018-09-19T15:36:16.000Z</updated>
   <id>https://aaronzhou-whu.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>单进程单线程、单进程多线程和多进程单线程</title>
+    <link href="https://aaronzhou-whu.github.io/%E5%8D%95%E8%BF%9B%E7%A8%8B%E5%8D%95%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%95%E8%BF%9B%E7%A8%8B%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%8D%95%E7%BA%BF%E7%A8%8B/"/>
+    <id>https://aaronzhou-whu.github.io/单进程单线程、单进程多线程和多进程单线程/</id>
+    <published>2018-09-19T14:39:56.000Z</published>
+    <updated>2018-09-19T15:36:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>我们都知道多线程可以充分利用CPU的性能，毕竟目前都是多核的，而且可以将一些I/O操作另起一个线程，避免当前线程阻塞。</p><p>但是Redis是单线程模型，也就是说不管多少个客户端连接上同一个Redis实例，它都是有一个线程来处理读写请求，严格来说这种模式是单进程单线程。那为什么Redis还是那么快呢？</p><ol><li>完全基于内存</li><li>数据结构简单</li><li>使用多路 I/O 复用模型</li></ol><p><strong>多路 I/O 复用模型</strong>是利用select、poll、epoll可以同时监察多个流的 I/O 事件的能力，在空闲的时候，会把当前线程阻塞掉，当有一个或多个流有I/O事件时，就从阻塞态中唤醒，于是程序就会轮询一遍所有的流（epoll是只轮询那些真正发出了事件的流），并且只依次顺序的处理就绪的流，这种做法就避免了大量的无用操作。这里“多路”指的是多个网络连接，“复用”指的是复用同一个线程，也就是Redis中的单线程。采用多路 I/O 复用技术可以让单个线程高效的处理多个连接请求（尽量减少网络IO的时间消耗）</p><p><strong>单进程单线程优点</strong></p><ol><li>代码更清晰，处理逻辑更简单</li><li>不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗</li><li>不存在多进程的切换导致消耗CPU</li></ol><p><strong>单进程单线程缺点</strong></p><p>无法充分发挥多核CPU性能——可以通过开启多个Redis实例来利用多核CPU</p><h4 id="多进程单线程模型：Nginx"><a href="#多进程单线程模型：Nginx" class="headerlink" title="多进程单线程模型：Nginx"></a>多进程单线程模型：Nginx</h4><p>其实我对Nginx了解也不多，只知道一点点相关知识。</p><p>不同于Apache，Nginx使用多进程的方法进行任务处理，每个worker进程只有一个线程，单线程循环处理全部监听的事件（是不是也有多路复用的意思在里面，果然技术很多都是相通的），而Apache对每一个连接都会起一个线程去处理。</p><p>通常一个单独的worker进程使用一个处理器核，这样能完全利用多核体系结构，并且避免线程抖动和锁。由于Nginx不为每个连接派生进程或线程，所以内存使用在大多数情况下是很节约并且高效的。同时由于不用频繁的生成和销毁进程或线程，所以Nginx也很节省CPU。</p><h4 id="单进程多线程模型：Memcached、MySQL等"><a href="#单进程多线程模型：Memcached、MySQL等" class="headerlink" title="单进程多线程模型：Memcached、MySQL等"></a>单进程多线程模型：Memcached、MySQL等</h4><p>这个没用过，只知道也是个类似于Redis的一个缓存数据库。</p><p>Memcache可以利用多核优势，单实例吞吐量极高，可以达到几十万QPS。</p><p>只支持简单的key/value数据结构，不像Redis可以支持丰富的数据类型。</p><p>无法进行持久化，数据不能备份，只能用于缓存使用，且重启后数据全部丢失。</p><p><strong>补充：</strong></p><p>多说一句，Memcached是基于libevent的事件处理。Linux内核提供的epoll为开发服务器提供了很大的便利，libevent和libev都是对epoll的封装，nginx自己实现了对epoll的封装。libevent和libev都是知名的Linux系统Ｃ事件驱动编程框架。所以，nginx在Windows上不像Linux快是有很大原因的。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;我们都知道多线程可以充分利用CPU的性能，毕竟目前都是多核的，而且可以将一些I/O操作另起一个线程，避免当前线程阻塞。&lt;/p&gt;
+&lt;p&gt;但是Redis是单线程模型，也就是说不管多少个客户端连接上同一个Redis实例，它都是有一个线程来处理读写请求，严格来说这种模式是单进程单线
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>FaaS--下一代服务框架</title>
@@ -453,31 +475,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>一致性哈希</title>
-    <link href="https://aaronzhou-whu.github.io/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/"/>
-    <id>https://aaronzhou-whu.github.io/一致性哈希/</id>
-    <published>2018-03-28T05:35:08.000Z</published>
-    <updated>2018-06-20T08:00:41.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>均衡性：哈希的结果能够尽可能分布到所有的缓存中去。</p><p>单调性：当缓冲区大小变化时一致性哈希尽量保护已分配的内容不会被重新映射到新缓冲区。</p><p>分散性：在分布式环境中，终端有可能看不到所有的缓冲，而是只能看到其中的一部分。当终端希望通过哈希过程将内容映射到缓冲上时，由于不同终端所见的缓冲范围有可能不同，从而导致哈希的结果不一致，最终的结果是相同的内容被不同的终端映射到不同的缓冲区中。</p><p>负载：另一个维度的分散性问题，对于一个特定的缓冲区而言，也可能被不同的用户映射为不同的内容。</p><p>首先，求出每个服务器的hash值，将其配置到一个 0~2^n 的圆环上（n通常取32）；<br>其次，用同样的方法求出待存储对象的主键 hash值，也将其配置到这个圆环上；<br>再次，从数据映射到的位置开始顺时针查找，将数据分布到找到的第一个服务器节点上。一致性hash的优点在于加入和删除节点时只会影响到在哈希环中相邻的节点，而对其他节点没有影响。</p><p>平衡性是指哈希的结果能够尽可能分布到所有的缓冲中去，这样可以使得所有的缓冲空间都得到利用。hash 算法并不是保证绝对的平衡，<br>为了解决这种情况， consistent hashing 引入了“虚拟节点”的概念，它可以如下定义：<br>“虚拟节点”（ virtual node ）是实际节点在 hash 空间的复制品（ replica ），一实际个节点对应了若干个“虚拟节点”，这个对应个数也成为“复制个数”，“虚拟节点”在 hash 空间中以 hash 值排列。</p><p>ps:摘选自网上很多blog，谢谢他们！</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;均衡性：哈希的结果能够尽可能分布到所有的缓存中去。&lt;/p&gt;
-&lt;p&gt;单调性：当缓冲区大小变化时一致性哈希尽量保护已分配的内容不会被重新映射到新缓冲区。&lt;/p&gt;
-&lt;p&gt;分散性：在分布式环境中，终端有可能看不到所有的缓冲，而是只能看到其中的一部分。当终端希望通过哈希过程将内容映射
-      
-    
-    </summary>
-    
-    
-      <category term="分布式" scheme="https://aaronzhou-whu.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
     
   </entry>
   
