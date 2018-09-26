@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="NIO," />
+  <meta name="keywords" content="MySQL," />
 
 
 
@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="最近看很多分布式框架或者高并发框架，底层通信很多都是基于Netty，而Netty的核心又是NIO（NoneBlocking IO ），是非阻塞的。 NIO中最主要的是Buffer（缓冲）、Channel（通道）还有Selector（选择器，也叫多路复用器）。 Buffer使用 Native 函数库直接分配堆外内存，然后通过一个存储在 Java 堆的 DirectByteBuffer 对象作为这块内">
-<meta name="keywords" content="NIO">
+<meta name="description" content="执行效果上：  count(*)包括了所有的列，相当于行数，在统计结果的时候，不会忽略列值为NULL。    count(1)包括了忽略所有列，用1代表代码行，在统计结果的时候，不会忽略列值为NULL。  count(列名)只包括列名那一列，在统计结果的时候，会忽略列值为空（这里的空不是只空字符串或者0，而是表示null）的计数，即某个字段值为NULL时，不统计。 执行效率上： 列名为主键，cou">
+<meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NIO小结（一）">
-<meta property="og:url" content="https://aaronzhou-whu.github.io/NIO小结（一）/index.html">
+<meta property="og:title" content="count（1）、count（*）与count（列名）的执行区别">
+<meta property="og:url" content="https://aaronzhou-whu.github.io/count（1）、count（*）与count（列名）的区别/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="最近看很多分布式框架或者高并发框架，底层通信很多都是基于Netty，而Netty的核心又是NIO（NoneBlocking IO ），是非阻塞的。 NIO中最主要的是Buffer（缓冲）、Channel（通道）还有Selector（选择器，也叫多路复用器）。 Buffer使用 Native 函数库直接分配堆外内存，然后通过一个存储在 Java 堆的 DirectByteBuffer 对象作为这块内">
+<meta property="og:description" content="执行效果上：  count(*)包括了所有的列，相当于行数，在统计结果的时候，不会忽略列值为NULL。    count(1)包括了忽略所有列，用1代表代码行，在统计结果的时候，不会忽略列值为NULL。  count(列名)只包括列名那一列，在统计结果的时候，会忽略列值为空（这里的空不是只空字符串或者0，而是表示null）的计数，即某个字段值为NULL时，不统计。 执行效率上： 列名为主键，cou">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-19T15:28:46.000Z">
+<meta property="og:updated_time" content="2018-09-26T01:36:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NIO小结（一）">
-<meta name="twitter:description" content="最近看很多分布式框架或者高并发框架，底层通信很多都是基于Netty，而Netty的核心又是NIO（NoneBlocking IO ），是非阻塞的。 NIO中最主要的是Buffer（缓冲）、Channel（通道）还有Selector（选择器，也叫多路复用器）。 Buffer使用 Native 函数库直接分配堆外内存，然后通过一个存储在 Java 堆的 DirectByteBuffer 对象作为这块内">
+<meta name="twitter:title" content="count（1）、count（*）与count（列名）的执行区别">
+<meta name="twitter:description" content="执行效果上：  count(*)包括了所有的列，相当于行数，在统计结果的时候，不会忽略列值为NULL。    count(1)包括了忽略所有列，用1代表代码行，在统计结果的时候，不会忽略列值为NULL。  count(列名)只包括列名那一列，在统计结果的时候，会忽略列值为空（这里的空不是只空字符串或者0，而是表示null）的计数，即某个字段值为NULL时，不统计。 执行效率上： 列名为主键，cou">
 
 
 
@@ -114,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="https://aaronzhou-whu.github.io/NIO小结（一）/"/>
+  <link rel="canonical" href="https://aaronzhou-whu.github.io/count（1）、count（*）与count（列名）的区别/"/>
 
 
 
 
 
-  <title>NIO小结（一） | BinYingの部屋</title>
+  <title>count（1）、count（*）与count（列名）的执行区别 | BinYingの部屋</title>
   
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/NIO小结（一）/">
+    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/count（1）、count（*）与count（列名）的区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron Zhou">
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">NIO小结（一）</h1>
+          <h1 class="post-title" itemprop="name headline">count（1）、count（*）与count（列名）的执行区别</h1>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T22:57:29+08:00">
-                2018-08-19 22:57:29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-26T09:34:04+08:00">
+                2018-09-26 09:34:04
               </time>
             
 
@@ -339,11 +339,11 @@
       
 
       
-        <p>最近看很多分布式框架或者高并发框架，底层通信很多都是基于Netty，而Netty的核心又是NIO（<em>NoneBlocking IO</em> ），是非阻塞的。</p>
-<p>NIO中最主要的是Buffer（缓冲）、Channel（通道）还有Selector（选择器，也叫多路复用器）。</p>
-<p><strong>Buffer</strong>使用 Native 函数库直接分配堆外内存，然后通过一个存储在 Java 堆的 DirectByteBuffer 对象作为这块内存的引用进行操作，避免了在 Java 堆和 Native 堆中来回复制数据。在BIO（阻塞IO）中，等待IO的线程必须被阻塞，这样效率会很低，引入Buffer缓冲区，当数据到达时，可以预先被写入缓冲区，再由缓冲区交给线程，因此线程无需阻塞地等待IO。</p>
-<p><strong>Channel</strong>是数据流通的通道，前面提到的Buffer只是数据的缓冲区，那么数据从哪里来以及到哪里去，都会经过一个流通通道。Channel 是对数据的源头和数据目标点流经途径的抽象，在这个意义上和InputStream和OutputStream类似。Buffer和Channel都是配合使用的。</p>
-<p><strong>Selector</strong>，很多高并发通信框架为何可以做到高并发，就是基于selector这种多路复用原理，一个线程可以负责多个channel。首先创建一个elector，然后将channel注册到selector，最后调用 select() 方法获取通道信息，用于判断是否有我们感兴趣的事件已经发生。</p>
+        <p><strong>执行效果上</strong>： </p>
+<p><strong>count(*)包括了所有的列，相当于行数</strong>，在统计结果的时候，<strong>不会忽略列值为NULL。   </strong></p>
+<p><strong>count(1)</strong>包括了忽略所有列，用1代表代码行，在统计结果的时候，<strong>不会忽略列值为NULL</strong>。 </p>
+<p><strong>count(列名)</strong>只包括列名那一列，在统计结果的时候，会忽略列值为空（这里的空不是只空字符串或者0，而是表示null）的计数，<strong>即某个字段值为NULL时，不统计</strong>。</p>
+<p><strong>执行效率上：</strong><br> 列名为主键，count(列名)会比count(1)快<br> 列名不为主键，count(1)会比count(列名)快<br> 如果表多个列并且没有主键，则 count（1） 的执行效率优于 count（<em>）<br> 如果有主键，则 select count（主键）的执行效率是最优的<br> 如果表只有一个字段，则 select count（</em>）最优。</p>
 
       
     </div>
@@ -361,7 +361,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/NIO/" rel="tag"># NIO</a>
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
           
         </div>
       
@@ -374,8 +374,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/JDK监控和故障处理工具/" rel="next" title="JDK监控和故障处理工具">
-                <i class="fa fa-chevron-left"></i> JDK监控和故障处理工具
+              <a href="/单进程单线程、单进程多线程和多进程单线程/" rel="next" title="单进程单线程、单进程多线程和多进程单线程">
+                <i class="fa fa-chevron-left"></i> 单进程单线程、单进程多线程和多进程单线程
               </a>
             
           </div>
@@ -383,10 +383,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/NIO（二）/" rel="prev" title="NIO（二）">
-                NIO（二） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
