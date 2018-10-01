@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, zhizhi" />
+  <meta name="keywords" content="Distribution," />
 
 
 
@@ -73,16 +73,18 @@
 
 
 
-<meta name="description" content="stay hungary, stay foolish">
-<meta property="og:type" content="website">
-<meta property="og:title" content="BinYingの部屋">
-<meta property="og:url" content="https://aaronzhou-whu.github.io/archives/2018/09/index.html">
+<meta name="description" content="前言：分布式系统相对于单机系统，除了提升整个系统的性能外，其他优势还包括具有更好地容错性和可靠性，提供可靠性可以理解为系统中一台或多台的机器故障不会使系统不可用（或者丢失数据）。保证系统可靠性的关键就是多副本（即数据需要有备份），一旦有多副本，那么就面临多副本之间的一致性问题。一致性算法正是用于解决分布式环境下多副本之间数据一致性的问题的。  Leader选举在Raft中，节点有三种角色：  Le">
+<meta name="keywords" content="Distribution">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式一致性之Raft">
+<meta property="og:url" content="https://aaronzhou-whu.github.io/分布式一致性之Raft/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="stay hungary, stay foolish">
+<meta property="og:description" content="前言：分布式系统相对于单机系统，除了提升整个系统的性能外，其他优势还包括具有更好地容错性和可靠性，提供可靠性可以理解为系统中一台或多台的机器故障不会使系统不可用（或者丢失数据）。保证系统可靠性的关键就是多副本（即数据需要有备份），一旦有多副本，那么就面临多副本之间的一致性问题。一致性算法正是用于解决分布式环境下多副本之间数据一致性的问题的。  Leader选举在Raft中，节点有三种角色：  Le">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-01T15:20:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BinYingの部屋">
-<meta name="twitter:description" content="stay hungary, stay foolish">
+<meta name="twitter:title" content="分布式一致性之Raft">
+<meta name="twitter:description" content="前言：分布式系统相对于单机系统，除了提升整个系统的性能外，其他优势还包括具有更好地容错性和可靠性，提供可靠性可以理解为系统中一台或多台的机器故障不会使系统不可用（或者丢失数据）。保证系统可靠性的关键就是多副本（即数据需要有备份），一旦有多副本，那么就面临多副本之间的一致性问题。一致性算法正是用于解决分布式环境下多副本之间数据一致性的问题的。  Leader选举在Raft中，节点有三种角色：  Le">
 
 
 
@@ -112,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="https://aaronzhou-whu.github.io/archives/2018/09/"/>
+  <link rel="canonical" href="https://aaronzhou-whu.github.io/分布式一致性之Raft/"/>
 
 
 
 
 
-  <title>归档 | BinYingの部屋</title>
+  <title>分布式一致性之Raft | BinYingの部屋</title>
   
 
 
@@ -137,7 +139,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -251,295 +253,162 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 目前共计 33 篇日志。 继续努力。
-      </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/分布式一致性之Raft/">
 
-      
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron Zhou">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BinYingの部屋">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">分布式一致性之Raft</h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-01T23:04:12+08:00">
+                2018-10-01 23:04:12
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/count（1）、count（*）与count（列名）的区别/" itemprop="url">
-              
-                <span itemprop="name">count（1）、count（*）与count（列名）的执行区别</span>
-              
-            </a>
-        
-      </h2>
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-26T09:34:04+08:00"
-              content="2018-09-26 09:34:04" >
-          09-26
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/单进程单线程、单进程多线程和多进程单线程/" itemprop="url">
-              
-                <span itemprop="name">单进程单线程、单进程多线程和多进程单线程</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-19T22:39:56+08:00"
-              content="2018-09-19 22:39:56" >
-          09-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/FaaS-下一代服务框架/" itemprop="url">
-              
-                <span itemprop="name">FaaS--下一代服务框架</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-16T23:45:03+08:00"
-              content="2018-09-16 23:45:03" >
-          09-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p><strong>前言：</strong><br>分布式系统相对于单机系统，除了提升整个系统的性能外，其他优势还包括具有更好地<strong>容错性</strong>和<strong>可靠性</strong>，提供可靠性可以理解为系统中一台或多台的机器故障不会使系统不可用（或者丢失数据）。<br>保证系统可靠性的关键就是多副本（即数据需要有备份），一旦有多副本，那么就面临多副本之间的一致性问题。<br>一致性算法正是用于解决分布式环境下多副本之间数据一致性的问题的。</p>
+<ul>
+<li><h3 id="Leader选举"><a href="#Leader选举" class="headerlink" title="Leader选举"></a>Leader选举</h3><p>在Raft中，节点有三种角色：</p>
+<ul>
+<li>Leader：负责接收客户端的请求，将日志复制到其他节点并告知其他节点何时应用这些日志是安全的</li>
+<li>Candidate：用于选举Leader的一种角色</li>
+<li>Follower：负责响应来自Leader或者Candidate的请求</li>
+</ul>
+<p>1.所有节点初始状态都是Follower角色<br>2.超时时间内没有收到Leader的请求则转换为Candidate进行选举<br>3.Candidate收到大多数节点的选票则转换为Leader；发现Leader或者收到更高任期的请求则转换为Follower<br>4.Leader在收到更高任期的请求后转换为Follower</p>
+</li>
+</ul>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Linux服务器进程CPU使用率超100问题排查/" itemprop="url">
-              
-                <span itemprop="name">Linux服务器进程CPU使用率超100%排查</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-15T21:43:52+08:00"
-              content="2018-09-15 21:43:52" >
-          09-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/一致性协议之2PC/" itemprop="url">
-              
-                <span itemprop="name">一致性协议之2PC</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-12T21:59:54+08:00"
-              content="2018-09-12 21:59:54" >
-          09-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/TCP粘包问题/" itemprop="url">
-              
-                <span itemprop="name">TCP粘包问题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-11T23:04:59+08:00"
-              content="2018-09-11 23:04:59" >
-          09-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/redis缓存相关总结/" itemprop="url">
-              
-                <span itemprop="name">redis缓存相关总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-04T20:09:04+08:00"
-              content="2018-09-04 20:09:04" >
-          09-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Distribution/" rel="tag"># Distribution</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/count（1）、count（*）与count（列名）的区别/" rel="next" title="count（1）、count（*）与count（列名）的执行区别">
+                <i class="fa fa-chevron-left"></i> count（1）、count（*）与count（列名）的执行区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -547,6 +416,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -567,8 +440,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -639,6 +521,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Leader选举"><span class="nav-number">1.</span> <span class="nav-text">Leader选举</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -793,6 +691,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
