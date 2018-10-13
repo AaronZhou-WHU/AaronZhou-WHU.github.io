@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="MyBatis," />
+  <meta name="keywords" content="Springboot," />
 
 
 
@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="坑一：mybatis 找不到映射器xml文件项目打包的时候，出现了找不到xml文件的错误，Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource xxx/mapper/xxx.xml，我用的绝对路径但是没有把resource改为url，导致出现file not found">
-<meta name="keywords" content="MyBatis">
+<meta name="description" content="Springboot项目都有一个启动类： 123456@SpringBootApplicationpublic class Application &amp;#123;    public static void main(String[] args) &amp;#123;        SpringApplication.run(Application.class, args);    &amp;#125;&amp;#125;">
+<meta name="keywords" content="Springboot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mybatis避坑总结（持续更新ing）">
-<meta property="og:url" content="https://aaronzhou-whu.github.io/mybatis避坑总结（持续更新ing）/index.html">
+<meta property="og:title" content="SpringBootApplication原理">
+<meta property="og:url" content="https://aaronzhou-whu.github.io/SpringBootApplication原理/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="坑一：mybatis 找不到映射器xml文件项目打包的时候，出现了找不到xml文件的错误，Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource xxx/mapper/xxx.xml，我用的绝对路径但是没有把resource改为url，导致出现file not found">
+<meta property="og:description" content="Springboot项目都有一个启动类： 123456@SpringBootApplicationpublic class Application &amp;#123;    public static void main(String[] args) &amp;#123;        SpringApplication.run(Application.class, args);    &amp;#125;&amp;#125;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-30T10:50:20.000Z">
+<meta property="og:updated_time" content="2018-10-13T15:02:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mybatis避坑总结（持续更新ing）">
-<meta name="twitter:description" content="坑一：mybatis 找不到映射器xml文件项目打包的时候，出现了找不到xml文件的错误，Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource xxx/mapper/xxx.xml，我用的绝对路径但是没有把resource改为url，导致出现file not found">
+<meta name="twitter:title" content="SpringBootApplication原理">
+<meta name="twitter:description" content="Springboot项目都有一个启动类： 123456@SpringBootApplicationpublic class Application &amp;#123;    public static void main(String[] args) &amp;#123;        SpringApplication.run(Application.class, args);    &amp;#125;&amp;#125;">
 
 
 
@@ -114,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="https://aaronzhou-whu.github.io/mybatis避坑总结（持续更新ing）/"/>
+  <link rel="canonical" href="https://aaronzhou-whu.github.io/SpringBootApplication原理/"/>
 
 
 
 
 
-  <title>mybatis避坑总结（持续更新ing） | BinYingの部屋</title>
+  <title>SpringBootApplication原理 | BinYingの部屋</title>
   
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/mybatis避坑总结（持续更新ing）/">
+    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/SpringBootApplication原理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron Zhou">
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">mybatis避坑总结（持续更新ing）</h1>
+          <h1 class="post-title" itemprop="name headline">SpringBootApplication原理</h1>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-30T10:41:58+08:00">
-                2018-07-30 10:41:58
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-13T22:47:46+08:00">
+                2018-10-13 22:47:46
               </time>
             
 
@@ -339,13 +339,24 @@
       
 
       
-        <h3 id="坑一：mybatis-找不到映射器xml文件"><a href="#坑一：mybatis-找不到映射器xml文件" class="headerlink" title="坑一：mybatis 找不到映射器xml文件"></a>坑一：mybatis 找不到映射器xml文件</h3><p>项目打包的时候，出现了找不到xml文件的错误，<code>Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource xxx/mapper/xxx.xml</code>，我用的绝对路径但是没有把resource改为url，导致出现<code>file not found</code> error。<br>官方文档给出了四种配置方式：相对路径、绝对路径、Mapper路径、Package路径。<br>```xml<br><!-- Using classpath relative resources --></p>
-<p><mappers><br>  <mapper resource="xxx/mapper/xxx.xml"><br></mapper></mappers><br><!-- Using url fully qualified paths --></p>
-<p><mappers><br>  <mapper url="file:///xxx/mappers/xxx.xml"><br></mapper></mappers><br><!-- Using mapper interface classes --></p>
-<p><mappers><br>  <mapper class="org.mybatis.builder.XXXMapper"><br></mapper></mappers><br><!-- Register all interfaces in a package as mappers --></p>
-<p><mappers><br>  <package name="org.mybatis.builder"><br></package></mappers></p>
-<h3 id="坑二：mybatis-批量插入list"><a href="#坑二：mybatis-批量插入list" class="headerlink" title="坑二：mybatis 批量插入list"></a>坑二：mybatis 批量插入list</h3><p>批量写入的时候用foreach collection，mysql和oracle数据库还有细微差别。<br><strong>Oracle:</strong><br>```xml</p>
-<insert id="inserList" parametertype="com.test.aaa"><br>    insert into table_name (name, adress, age)<br>    values<br>    <foreach collection="list" item="item" index="index" separator=","><br>        (select<br>        #{item.name},#{item.adress}, #{item.age}<br>        from dual)<br>    </foreach><br></insert><br><strong>MySQL:</strong><br>```xml<br><insert id="inserList" parametertype="com.test.aaa"><br>    insert into table_name (name, adress, age)<br>    values<br>    <foreach collection="list" item="item" index="index" separator=","><br>        (#{item.name},  #{item.adress},  #{item.age})<br>    </foreach><br></insert>
+        <p>Springboot项目都有一个启动类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面代码可以看出，@SpringBootApplication注解和SpringApplication.run()方法是关键，所以SpringBoot的启动原理就跟这两个密切相关。</p>
+<h3 id="SpringBootApplication注解"><a href="#SpringBootApplication注解" class="headerlink" title="@SpringBootApplication注解"></a>@SpringBootApplication注解</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.TYPE)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(excludeFilters = &#123;</span><br><span class="line">        <span class="meta">@Filter</span>(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),</span><br><span class="line">        <span class="meta">@Filter</span>(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) &#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SpringBootApplication &#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中最重要的三个Annotation是：</p>
+<ul>
+<li><p>@Configuration</p>
+</li>
+<li><p>@EnableAutoConfiguration</p>
+</li>
+<li><p>@ComponentScan</p>
+</li>
+</ul>
+<p><strong>@Configuration</strong><br>它就是JavaConfig形式的Spring Ioc容器的配置类使用的那个@Configuration，SpringBoot社区推荐使用基于JavaConfig的配置形式，所以，这里的启动类标注了@Configuration之后，本身其实也是一个IoC容器的配置类。 </p>
+<p><strong>@EnableAutoConfiguration</strong><br>@EnableAutoConfiguration这个Annotation最为重要，和Spring框架提供的各种名字为@Enable开头的Annotation定义，比如@EnableScheduling、@EnableCaching、@EnableMBeanExport等类似，@EnableAutoConfiguration的理念和做事方式其实一脉相承，简单概括一下就是，借助@Import的支持，收集和注册特定场景相关的bean定义。</p>
+<p>@EnableScheduling是通过@Import将Spring调度框架相关的bean定义都加载到IoC容器。<br>@EnableMBeanExport是通过@Import将JMX相关的bean定义加载到IoC容器。<br>而@EnableAutoConfiguration也是借助@Import的帮助，将所有符合自动配置条件的bean定义加载到IoC容器，仅此而已！</p>
+<p><strong>@ComponentScan</strong><br>@ComponentScan这个注解在Spring中很重要，它对应XML配置中的元素，@ComponentScan的功能其实就是自动扫描并加载符合条件的组件（比如@Component和@Repository等）或者bean定义，最终将这些bean定义加载到IoC容器中。</p>
+<p>我们可以通过basePackages等属性来细粒度的定制@ComponentScan自动扫描的范围，如果不指定，则默认Spring框架实现会从声明@ComponentScan所在类的package进行扫描。</p>
 
       
     </div>
@@ -363,7 +374,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/MyBatis/" rel="tag"># MyBatis</a>
+            <a href="/tags/Springboot/" rel="tag"># Springboot</a>
           
         </div>
       
@@ -376,8 +387,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Kaggle之Titanic/" rel="next" title="Kaggle之Titanic">
-                <i class="fa fa-chevron-left"></i> Kaggle之Titanic
+              <a href="/分布式一致性之Raft/" rel="next" title="分布式一致性之Raft">
+                <i class="fa fa-chevron-left"></i> 分布式一致性之Raft
               </a>
             
           </div>
@@ -385,10 +396,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/JDK监控和故障处理工具/" rel="prev" title="JDK监控和故障处理工具">
-                JDK监控和故障处理工具 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -531,7 +538,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#坑一：mybatis-找不到映射器xml文件"><span class="nav-number">1.</span> <span class="nav-text">坑一：mybatis 找不到映射器xml文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坑二：mybatis-批量插入list"><span class="nav-number">2.</span> <span class="nav-text">坑二：mybatis 批量插入list</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringBootApplication注解"><span class="nav-number">1.</span> <span class="nav-text">@SpringBootApplication注解</span></a></li></ol></div>
             
 
           </div>
