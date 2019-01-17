@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://aaronzhou-whu.github.io/"/>
-  <updated>2019-01-08T13:32:26.000Z</updated>
+  <updated>2019-01-17T12:51:55.000Z</updated>
   <id>https://aaronzhou-whu.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MongoTemplate两种方式读取mongodb</title>
+    <link href="https://aaronzhou-whu.github.io/MongoTemplate%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E8%AF%BB%E5%8F%96mongodb/"/>
+    <id>https://aaronzhou-whu.github.io/MongoTemplate两种方式读取mongodb/</id>
+    <published>2019-01-17T12:51:18.000Z</published>
+    <updated>2019-01-17T12:51:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="映射方式读取"><a href="#映射方式读取" class="headerlink" title="映射方式读取"></a>映射方式读取</h3><p>一般Java开发都是基于面向对象的，所以大部分情况下都是采用的映射方式，即将mongodb的document映射成java entity，并在entity类上添加@Document(collection =”xxx_collection”)注解，以及在类的变量上添加@Field(“xxx_name”)注解。在使用MongoTemplate的查询mongodb的时候，先创建一个Query对象–查询条件，然后用mongoTemplate.find(query, entityClass)这样的方式，就可以返回对应的实体对象集合。方式如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Query query=<span class="keyword">new</span> Query(Criteria.where(<span class="string">"filed"</span>).is(<span class="string">"value"</span>));</span><br><span class="line">mongoTemplate.findOne(query, entity.class);</span><br></pre></td></tr></table></figure></p><h3 id="非映射方式读取"><a href="#非映射方式读取" class="headerlink" title="非映射方式读取"></a>非映射方式读取</h3><p>但有时候，mongodb里面的数据结构经常变动，此时就不能再使用MongoTemplate封装好的find方法（<strong>规范开发多么重要啊</strong>），可以使用原生的方式读取mongodb。方式如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.获取集合对象</span></span><br><span class="line">MongoCollection&lt;Document&gt; collection = mongoTemplate.getCollection(<span class="string">"xxx"</span>);</span><br><span class="line"><span class="comment">//2.创建用于查询的BSON对象</span></span><br><span class="line">Bson bson = eq(<span class="string">"field"</span>, <span class="string">"value"</span>);</span><br><span class="line"><span class="comment">//3.利用bson条件查询结果</span></span><br><span class="line">FindIterable&lt;Document&gt; documents = collection.find(bson);</span><br></pre></td></tr></table></figure></p><p><em><code>PS</code></em> : 在定义entity类的时候加上@Data注解可以省去Getter,Setter以及toString等的代码</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;映射方式读取&quot;&gt;&lt;a href=&quot;#映射方式读取&quot; class=&quot;headerlink&quot; title=&quot;映射方式读取&quot;&gt;&lt;/a&gt;映射方式读取&lt;/h3&gt;&lt;p&gt;一般Java开发都是基于面向对象的，所以大部分情况下都是采用的映射方式，即将mongodb的document
+      
+    
+    </summary>
+    
+    
+      <category term="MongoTemplate" scheme="https://aaronzhou-whu.github.io/tags/MongoTemplate/"/>
+    
+  </entry>
   
   <entry>
     <title>激活函数对比</title>
@@ -469,22 +492,6 @@
     
     
       <category term="design patten" scheme="https://aaronzhou-whu.github.io/tags/design-patten/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>knn算法</title>
-    <link href="https://aaronzhou-whu.github.io/knn%E7%AE%97%E6%B3%95/"/>
-    <id>https://aaronzhou-whu.github.io/knn算法/</id>
-    <published>2018-06-26T15:30:31.000Z</published>
-    <updated>2018-06-26T15:33:09.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-      <category term="machine learning" scheme="https://aaronzhou-whu.github.io/tags/machine-learning/"/>
     
   </entry>
   
