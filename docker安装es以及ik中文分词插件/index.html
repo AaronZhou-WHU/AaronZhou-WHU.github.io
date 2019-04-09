@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="machine learning," />
+  <meta name="keywords" content="ElasticSearch," />
 
 
 
@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="stay hungary, stay foolish">
-<meta name="keywords" content="machine learning">
+<meta name="description" content="Docker安装ElasticSearch安装：docker pull docker.elastic.co/elasticsearch/elasticsearch:6.3.2启动：docker run -d –name es -p 9200:9200 -p 9300:9300 -e “discovery.type=single-node” docker.elastic.co/elasticsear">
+<meta name="keywords" content="ElasticSearch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="knn算法">
-<meta property="og:url" content="https://aaronzhou-whu.github.io/knn算法/index.html">
+<meta property="og:title" content="docker安装es以及ik中文分词插件">
+<meta property="og:url" content="https://aaronzhou-whu.github.io/docker安装es以及ik中文分词插件/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="stay hungary, stay foolish">
+<meta property="og:description" content="Docker安装ElasticSearch安装：docker pull docker.elastic.co/elasticsearch/elasticsearch:6.3.2启动：docker run -d –name es -p 9200:9200 -p 9300:9300 -e “discovery.type=single-node” docker.elastic.co/elasticsear">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-26T15:33:09.000Z">
+<meta property="og:updated_time" content="2019-04-09T11:37:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="knn算法">
-<meta name="twitter:description" content="stay hungary, stay foolish">
+<meta name="twitter:title" content="docker安装es以及ik中文分词插件">
+<meta name="twitter:description" content="Docker安装ElasticSearch安装：docker pull docker.elastic.co/elasticsearch/elasticsearch:6.3.2启动：docker run -d –name es -p 9200:9200 -p 9300:9300 -e “discovery.type=single-node” docker.elastic.co/elasticsear">
 
 
 
@@ -114,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="https://aaronzhou-whu.github.io/knn算法/"/>
+  <link rel="canonical" href="https://aaronzhou-whu.github.io/docker安装es以及ik中文分词插件/"/>
 
 
 
 
 
-  <title>knn算法 | BinYingの部屋</title>
+  <title>docker安装es以及ik中文分词插件 | BinYingの部屋</title>
   
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/knn算法/">
+    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/docker安装es以及ik中文分词插件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron Zhou">
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">knn算法</h1>
+          <h1 class="post-title" itemprop="name headline">docker安装es以及ik中文分词插件</h1>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-26T23:30:31+08:00">
-                2018-06-26 23:30:31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-09T19:08:57+08:00">
+                2019-04-09 19:08:57
               </time>
             
 
@@ -339,7 +339,18 @@
       
 
       
-        
+        <p><strong>Docker安装ElasticSearch</strong><br>安装：docker pull docker.elastic.co/elasticsearch/elasticsearch:6.3.2<br>启动：docker run -d –name es -p 9200:9200 -p 9300:9300 -e “discovery.type=single-node” docker.elastic.co/elasticsearch/elasticsearch:6.3.2</p>
+<p><strong>Docker安装ElasticSearch-head</strong><br>安装：docker pull mobz/elasticsearch-head:5<br>启动：docker run -d -p 9100:9100 docker.io/mobz/elasticsearch-head:5</p>
+<p>浏览器输入localhost:9100打开elasticsearch-head页面，填入ES地址localhost:9200,即可进入es界面。</p>
+<p>跨域拒绝访问问题：<br>在elasticsearch.yml中添加：</p>
+<blockquote>
+<p>http.cors.enabled: true<br>http.cors.allow-origin: “*”</p>
+</blockquote>
+<p><strong>Docker安装ik中文分词插件</strong><br>进入es容器内，docker exec -it es /bin/bash</p>
+<blockquote>
+<p>elasticsearch-plugin install <a href="https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.3.2/elasticsearch-analysis-ik-6.3.2.zip" target="_blank" rel="noopener">https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.3.2/elasticsearch-analysis-ik-6.3.2.zip</a></p>
+</blockquote>
+
       
     </div>
     
@@ -356,7 +367,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
+            <a href="/tags/ElasticSearch/" rel="tag"># ElasticSearch</a>
           
         </div>
       
@@ -369,8 +380,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/机器学习入门之常见机器学习算法简介/" rel="next" title="机器学习入门之常见机器学习算法简介">
-                <i class="fa fa-chevron-left"></i> 机器学习入门之常见机器学习算法简介
+              <a href="/MongoTemplate两种方式读取mongodb/" rel="next" title="MongoTemplate两种方式读取mongodb">
+                <i class="fa fa-chevron-left"></i> MongoTemplate两种方式读取mongodb
               </a>
             
           </div>
@@ -378,10 +389,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/设计模式整理（一）/" rel="prev" title="设计模式整理（一）">
-                设计模式整理（一） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
