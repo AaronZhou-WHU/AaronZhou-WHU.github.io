@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://aaronzhou-whu.github.io/"/>
-  <updated>2019-04-09T11:37:41.000Z</updated>
+  <updated>2019-04-10T12:17:30.000Z</updated>
   <id>https://aaronzhou-whu.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Springboot自定义数据源DataSource</title>
+    <link href="https://aaronzhou-whu.github.io/Springboot%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E6%BA%90DataSource/"/>
+    <id>https://aaronzhou-whu.github.io/Springboot自定义数据源DataSource/</id>
+    <published>2019-04-10T11:59:38.000Z</published>
+    <updated>2019-04-10T12:17:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>Springboot使用JPA</strong><br>maven加入依赖：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p><p>application.properties配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring.jpa.database=oracle</span><br><span class="line">spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver</span><br><span class="line">spring.datasource.url=jdbc:oracle:thin:@IP:port/sid</span><br><span class="line">spring.datasource.username=root</span><br><span class="line">spring.datasource.password=password</span><br></pre></td></tr></table></figure></p><p>经过以上简单配置，就可以使用jpa相关接口了，但是很多时候，密码并不是明文的，这时候就要用到自定义datasource来加载配置。</p><p><strong>自定义DataSource</strong><br>可以使用阿里的druid为自定义DataSource</p><p>maven加入依赖：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;druid&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.1.9&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p><p>application.properties添加配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.type=com.alibaba.druid.pool.DruidDataSource</span><br></pre></td></tr></table></figure></p><p>自定义DataSourceAutoConfiguration类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties</span>(DataSourceProperties.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataSourceAutoConfiguration</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    DataSourceProperties properties;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//可以在此处调用相关接口获取数据库的配置信息进行 DataSource 的配置</span></span><br><span class="line">        DruidDataSource dataSource = <span class="keyword">new</span> DruidDataSource();</span><br><span class="line">        dataSource.setUrl(properties.getUrl());</span><br><span class="line">        dataSource.setUsername(properties.getUsername());</span><br><span class="line">        <span class="comment">//密码处解密</span></span><br><span class="line">        <span class="comment">//dataSource.setPassword(properties.getPassword());</span></span><br><span class="line">        dataSource.setDriverClassName(properties.getDriverClassName());</span><br><span class="line">        <span class="keyword">return</span> dataSource;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>配置好好，就可以跟之前的一样使用Jpa相关接口了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;Springboot使用JPA&lt;/strong&gt;&lt;br&gt;maven加入依赖：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1
+      
+    
+    </summary>
+    
+    
+      <category term="Springboot JPA" scheme="https://aaronzhou-whu.github.io/tags/Springboot-JPA/"/>
+    
+  </entry>
   
   <entry>
     <title>docker安装es以及ik中文分词插件</title>
@@ -468,30 +491,6 @@
     
     
       <category term="Kaggle MachineLearning" scheme="https://aaronzhou-whu.github.io/tags/Kaggle-MachineLearning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>线程池小结</title>
-    <link href="https://aaronzhou-whu.github.io/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%B0%8F%E7%BB%93/"/>
-    <id>https://aaronzhou-whu.github.io/线程池小结/</id>
-    <published>2018-07-13T11:54:39.000Z</published>
-    <updated>2018-07-13T12:38:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>至于为什么要用多线程，以及线程池的好处这里就不说了。这周又粗略看了一遍《Java并发编程的艺术》，又了解了一遍多线程以及线程池的相关知识，为什么这里总是提到“又”，那时因为以前看过，看完也不加总结，总是遗忘，此次总结一下，希望遗忘曲线能够延长一些。</p><h3 id="一-Java通过Executors提供四种线程池，分别为："><a href="#一-Java通过Executors提供四种线程池，分别为：" class="headerlink" title="一. Java通过Executors提供四种线程池，分别为："></a>一. Java通过Executors提供四种线程池，分别为：</h3><p><strong>newCachedThreadPool</strong><br>创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。<br>CachedThreadPool 是通过 java.util.concurrent.Executors 创建的 ThreadPoolExecutor 实例。这个实例会根据需要，在线程可用时，重用之前构造好的池中线程。这个线程池在执行 大量短生命周期的异步任务时（many short-lived asynchronous task），可以显著提高程序性能。调用 execute 时，可以重用之前已构造的可用线程，如果不存在可用线程，那么会重新创建一个新的线程并将其加入到线程池中。如果线程超过 60 秒还未被使用，就会被中止并从缓存中移除。因此，线程池在长时间空闲后不会消耗任何资源。<br><strong>newFixedThreadPool</strong> 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。<br>FixedThreadPool 是通过 java.util.concurrent.Executors 创建的 ThreadPoolExecutor 实例。这个实例会复用 固定数量的线程 处理一个 共享的无边界队列 。任何时间点，最多有 nThreads 个线程会处于活动状态执行任务。如果当所有线程都是活动时，有多的任务被提交过来，那么它会一致在队列中等待直到有线程可用。如果任何线程在执行过程中因为错误而中止，新的线程会替代它的位置来执行后续的任务。所有线程都会一致存于线程池中，直到显式的执行 ExecutorService.shutdown() 关闭。<br><strong>newScheduledThreadPool</strong> 创建一个定长线程池，支持定时及周期性任务执行。<br><strong>newSingleThreadExecutor</strong> 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。<br>SingleThreadPool 是通过 java.util.concurrent.Executors 创建的 ThreadPoolExecutor 实例。这个实例只会使用单个工作线程来执行一个无边界的队列。（注意，如果单个线程在执行过程中因为某些错误中止，新的线程会替代它执行后续线程）。它可以保证认为是按顺序执行的，任何时候都不会有多于一个的任务处于活动状态。和 newFixedThreadPool(1) 的区别在于，如果线程遇到错误中止，它是无法使用替代线程的。</p><h3 id="FixedThreadPool-与-CachedThreadPool-特性对比"><a href="#FixedThreadPool-与-CachedThreadPool-特性对比" class="headerlink" title="FixedThreadPool 与 CachedThreadPool 特性对比"></a>FixedThreadPool 与 CachedThreadPool 特性对比</h3><table><thead><tr><th>特性</th><th style="text-align:center">FixedThreadPool</th><th style="text-align:center">CachedThreadPool</th></tr></thead><tbody><tr><td>重用</td><td style="text-align:center">FixedThreadPool 与 CacheThreadPool差不多，也是能 reuse 就用，但不能随时建新的线程</td><td style="text-align:center">缓存型池子，先查看池中有没有以前建立的线程，如果有，就 reuse ；如果没有，就建一个新的线程加入池中</td></tr><tr><td>池大小</td><td style="text-align:center">可指定 nThreads，固定数量</td><td style="text-align:center">可增长，最大值 Integer.MAX_VALUE</td></tr><tr><td>队列大小</td><td style="text-align:center">无限制</td><td style="text-align:center">无限制</td></tr><tr><td>超时</td><td style="text-align:center">无 IDLE</td><td style="text-align:center">默认60秒 IDLE</td></tr><tr><td>使用场景</td><td style="text-align:center">FixedThreadPool多数针对一些很稳定很固定的正规并发线程，多用于服务器</td><td style="text-align:center">大量短生命周期的异步任务</td></tr><tr><td>结束</td><td style="text-align:center">不会自动销毁</td><td style="text-align:center">放入 CachedThreadPool 的线程不必担心其结束，超过 TIMEOUT 不活动，其会自动被终止。</td></tr></tbody></table><h3 id="二-ThreadPoolExecutor的重要参数"><a href="#二-ThreadPoolExecutor的重要参数" class="headerlink" title="二. ThreadPoolExecutor的重要参数"></a>二. ThreadPoolExecutor的重要参数</h3><p><strong>corePoolSize：核心线程数</strong><br>核心线程会一直存活，及时没有任务需要执行<br>当线程数小于核心线程数时，即使有线程空闲，线程池也会优先创建新线程处理<br>设置allowCoreThreadTimeout=true（默认false）时，核心线程会超时关闭<br><strong>queueCapacity：任务队列容量（阻塞队列）</strong><br>当核心线程数达到最大时，新任务会放在队列中排队等待执行<br><strong>maxPoolSize：最大线程数</strong><br>当线程数&gt;=corePoolSize，且任务队列已满时。线程池会创建新线程来处理任务<br>当线程数=maxPoolSize，且任务队列已满时，线程池会拒绝处理任务而抛出异常<br><strong>keepAliveTime：线程空闲时间</strong><br>当线程空闲时间达到keepAliveTime时，线程会退出，直到线程数量=corePoolSize<br>如果allowCoreThreadTimeout=true，则会直到线程数量=0<br><strong>allowCoreThreadTimeout：允许核心线程超时</strong><br><strong>rejectedExecutionHandler：任务拒绝处理器</strong><br>1.两种情况会拒绝处理任务：</p><blockquote><ul><li>当线程数已经达到maxPoolSize，切队列已满，会拒绝新任务</li><li>当线程池被调用shutdown()后，会等待线程池里的任务执行完毕，再shutdown。如果在调用shutdown()和线程池真正shutdown之间提交任务，会拒绝新任务</li></ul></blockquote><p>2.线程池会调用rejectedExecutionHandler来处理这个任务。如果没有设置默认是AbortPolicy，会抛出异常<br>3.ThreadPoolExecutor类有几个内部实现类来处理这类情况：</p><blockquote><ul><li>AbortPolicy 丢弃任务，抛运行时异常</li><li>CallerRunsPolicy 执行任务</li><li>DiscardPolicy 忽视，什么都不会发生</li><li>DiscardOldestPolicy 从队列中踢出最先进入队列（最后一个执行）的任务</li></ul></blockquote><h3 id="三-线程池按以下行为执行任务"><a href="#三-线程池按以下行为执行任务" class="headerlink" title="三. 线程池按以下行为执行任务"></a>三. 线程池按以下行为执行任务</h3><p>1.当线程数小于核心线程数时，创建线程。<br>2.当线程数大于等于核心线程数，且任务队列未满时，将任务放入任务队列。</p><ol><li>当线程数大于等于核心线程数，且任务队列已满<blockquote><ul><li>若线程数小于最大线程数，创建线程</li><li>若线程数等于最大线程数，抛出异常，拒绝任务</li></ul></blockquote></li></ol><h3 id="四-线程池的底层实现"><a href="#四-线程池的底层实现" class="headerlink" title="四. 线程池的底层实现"></a>四. 线程池的底层实现</h3><p>上节中有个参数是queueCapacity，提到queue，必然要提到各种线程池的底层的阻塞队列的实现方式<br><strong>SynchronousQueue——直接提交策略</strong><br>适用于CachedThreadPool。它将任务直接提交给线程而不保持它们。如果不存在可用于立即运行任务的线程，则试图把任务加入队列将失败，因此会构造一个新的线程。此策略可以避免在处理可能具有内部依赖性的请求集时出现锁。直接提交通常要求最大的 maximumPoolSize 以避免拒绝新提交的任务（正如CachedThreadPool这个参数的值为Integer.MAX_VALUE）。当任务以超过队列所能处理的量、连续到达时，此策略允许线程具有增长的可能性。吞吐量较高。</p><p><strong>LinkedBlockingQueue——无界队列</strong><br>适用于FixedThreadPool与SingleThreadExcutor。基于链表的阻塞队列，创建的线程数不会超过corePoolSizes（maximumPoolSize值与其一致），当线程正忙时，任务进入队列等待。按照FIFO原则对元素进行排序，吞吐量高于ArrayBlockingQueue。</p><p><strong>ArrayListBlockingQueue——有界队列</strong><br>有助于防止资源耗尽，但是可能较难调整和控制。队列大小和最大池大小可能需要相互折衷：使用大型队列和小型池可以最大限度地降低 CPU 使用率、操作系统资源和上下文切换开销，但是可能导致人工降低吞吐量。如果任务频繁阻塞（例如，如果它们是 I/O边界），则系统可能为超过您许可的更多线程安排时间。使用小型队列通常要求较大的池大小，CPU使用率较高，但是可能遇到不可接受的调度开销，这样也会降低吞吐量。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;至于为什么要用多线程，以及线程池的好处这里就不说了。这周又粗略看了一遍《Java并发编程的艺术》，又了解了一遍多线程以及线程池的相关知识，为什么这里总是提到“又”，那时因为以前看过，看完也不加总结，总是遗忘，此次总结一下，希望遗忘曲线能够延长一些。&lt;/p&gt;
-&lt;h3 id=&quot;
-      
-    
-    </summary>
-    
-    
-      <category term="multi-thread" scheme="https://aaronzhou-whu.github.io/tags/multi-thread/"/>
     
   </entry>
   

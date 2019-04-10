@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="DeepLearning," />
+  <meta name="keywords" content="Springboot JPA," />
 
 
 
@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="激活函数激活函数简单来说就是表示神经元中输入与输出之间的映射关系。 具有以下特征：（摘抄至相关书籍）  非线性：当激活函数是线性的时候，一个两层的神经网络就可以逼近基本上所有的函数了。 可微：当优化方法是基于梯度的时候，这个性质是必须的。 单调性：当激活函数是单调的时候，单层网络能够保证是凸函数。 f(x)≈x：当激活函数满足这个性质的时候，如果参数的初始化是random的很小的值，那么神经网络">
-<meta name="keywords" content="DeepLearning">
+<meta name="description" content="Springboot使用JPAmaven加入依赖：12345678&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dep">
+<meta name="keywords" content="Springboot JPA">
 <meta property="og:type" content="article">
-<meta property="og:title" content="激活函数对比">
-<meta property="og:url" content="https://aaronzhou-whu.github.io/激活函数对比/index.html">
+<meta property="og:title" content="Springboot自定义数据源DataSource">
+<meta property="og:url" content="https://aaronzhou-whu.github.io/Springboot自定义数据源DataSource/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="激活函数激活函数简单来说就是表示神经元中输入与输出之间的映射关系。 具有以下特征：（摘抄至相关书籍）  非线性：当激活函数是线性的时候，一个两层的神经网络就可以逼近基本上所有的函数了。 可微：当优化方法是基于梯度的时候，这个性质是必须的。 单调性：当激活函数是单调的时候，单层网络能够保证是凸函数。 f(x)≈x：当激活函数满足这个性质的时候，如果参数的初始化是random的很小的值，那么神经网络">
+<meta property="og:description" content="Springboot使用JPAmaven加入依赖：12345678&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dep">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-08T13:32:26.000Z">
+<meta property="og:updated_time" content="2019-04-10T12:17:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="激活函数对比">
-<meta name="twitter:description" content="激活函数激活函数简单来说就是表示神经元中输入与输出之间的映射关系。 具有以下特征：（摘抄至相关书籍）  非线性：当激活函数是线性的时候，一个两层的神经网络就可以逼近基本上所有的函数了。 可微：当优化方法是基于梯度的时候，这个性质是必须的。 单调性：当激活函数是单调的时候，单层网络能够保证是凸函数。 f(x)≈x：当激活函数满足这个性质的时候，如果参数的初始化是random的很小的值，那么神经网络">
+<meta name="twitter:title" content="Springboot自定义数据源DataSource">
+<meta name="twitter:description" content="Springboot使用JPAmaven加入依赖：12345678&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dep">
 
 
 
@@ -114,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="https://aaronzhou-whu.github.io/激活函数对比/"/>
+  <link rel="canonical" href="https://aaronzhou-whu.github.io/Springboot自定义数据源DataSource/"/>
 
 
 
 
 
-  <title>激活函数对比 | BinYingの部屋</title>
+  <title>Springboot自定义数据源DataSource | BinYingの部屋</title>
   
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/激活函数对比/">
+    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/Springboot自定义数据源DataSource/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron Zhou">
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">激活函数对比</h1>
+          <h1 class="post-title" itemprop="name headline">Springboot自定义数据源DataSource</h1>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-08T19:39:53+08:00">
-                2019-01-08 19:39:53
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-10T19:59:38+08:00">
+                2019-04-10 19:59:38
               </time>
             
 
@@ -339,31 +339,14 @@
       
 
       
-        <ul>
-<li><h3 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h3><p><strong>激活函数</strong>简单来说就是表示神经元中输入与输出之间的映射关系。</p>
-<p>具有以下特征：（<em>摘抄至相关书籍</em>）</p>
-<ul>
-<li>非线性：当激活函数是线性的时候，一个两层的神经网络就可以逼近基本上所有的函数了。</li>
-<li>可微：当优化方法是基于梯度的时候，这个性质是必须的。</li>
-<li>单调性：当激活函数是单调的时候，单层网络能够保证是凸函数。</li>
-<li>f(x)≈x：当激活函数满足这个性质的时候，如果参数的初始化是random的很小的值，那么神经网络的训练将会很高效。</li>
-<li>输出值范围：当激活函数输出值是有限的时候，基于梯度的优化方法会更加稳定，因为特征的表示受有限权值的影响更显著；当激活函数的输出是无限的时候，模型的训练会更加高效，不过在这种情况小，一般需要更小的学习率。</li>
-</ul>
-<h3 id="激活函数有哪些"><a href="#激活函数有哪些" class="headerlink" title="激活函数有哪些"></a>激活函数有哪些</h3><p><strong>Sigmoid</strong> - 取值范围为(0,1)，适用于二分类<br><strong>Tanh</strong> - 取值范围为[-1,1]，适用于二分类<br><strong>Rectified Linear Unit(ReLU)</strong> - 输入信号 <0 时，输出都是0，="">0 的情况下，输出等于输入，用于隐层神经元输出<br><strong>Softmax</strong> - 取值范围为[0,1]，所有概率的和将等于1，用于多分类</0></p>
-<p>Sigmoid特点：</p>
-<ol>
-<li>激活函数计算量大，反向传播求误差梯度时，求导涉及除法</li>
-<li>反向传播时，很容易就会出现梯度消失的情况，从而无法完成深层网络的训练<br>Tanh特点：<br>Tanh是Sigmoid的变形，与 sigmoid 不同的是，tanh 是0均值的。因此实际应用中，tanh 会比 sigmoid 更好。<br>ReLU特点：</li>
-<li>在输入为正数的时候，不存在梯度饱和问题。</li>
-<li>计算速度要快很多。ReLU函数只有线性关系，不管是前向传播还是反向传播，都比sigmod和tanh要快很多。（sigmod和tanh要计算指数，计算速度会比较慢）</li>
-</ol>
-</li>
-</ul>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
-<li>使用 ReLU，就要注意设置 learning rate，不要让网络训练过程中出现很多 “dead” 神经元</li>
-<li>如果“dead”无法解决，可以尝试 Leaky ReLU、PReLU 、RReLU等Relu变体来替代ReLU</li>
-<li>不建议使用 sigmoid，如果一定要使用，也可以用tanh来替代</li>
-</ul>
+        <p><strong>Springboot使用JPA</strong><br>maven加入依赖：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>application.properties配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring.jpa.database=oracle</span><br><span class="line">spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver</span><br><span class="line">spring.datasource.url=jdbc:oracle:thin:@IP:port/sid</span><br><span class="line">spring.datasource.username=root</span><br><span class="line">spring.datasource.password=password</span><br></pre></td></tr></table></figure></p>
+<p>经过以上简单配置，就可以使用jpa相关接口了，但是很多时候，密码并不是明文的，这时候就要用到自定义datasource来加载配置。</p>
+<p><strong>自定义DataSource</strong><br>可以使用阿里的druid为自定义DataSource</p>
+<p>maven加入依赖：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;druid&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.1.9&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>application.properties添加配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.type=com.alibaba.druid.pool.DruidDataSource</span><br></pre></td></tr></table></figure></p>
+<p>自定义DataSourceAutoConfiguration类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties</span>(DataSourceProperties.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataSourceAutoConfiguration</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    DataSourceProperties properties;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//可以在此处调用相关接口获取数据库的配置信息进行 DataSource 的配置</span></span><br><span class="line">        DruidDataSource dataSource = <span class="keyword">new</span> DruidDataSource();</span><br><span class="line">        dataSource.setUrl(properties.getUrl());</span><br><span class="line">        dataSource.setUsername(properties.getUsername());</span><br><span class="line">        <span class="comment">//密码处解密</span></span><br><span class="line">        <span class="comment">//dataSource.setPassword(properties.getPassword());</span></span><br><span class="line">        dataSource.setDriverClassName(properties.getDriverClassName());</span><br><span class="line">        <span class="keyword">return</span> dataSource;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>配置好好，就可以跟之前的一样使用Jpa相关接口了。</p>
 
       
     </div>
@@ -381,7 +364,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/DeepLearning/" rel="tag"># DeepLearning</a>
+            <a href="/tags/Springboot-JPA/" rel="tag"># Springboot JPA</a>
           
         </div>
       
@@ -394,8 +377,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Apollo和SpringCloudConfig/" rel="next" title="Apollo和SpringCloudConfig">
-                <i class="fa fa-chevron-left"></i> Apollo和SpringCloudConfig
+              <a href="/docker安装es以及ik中文分词插件/" rel="next" title="docker安装es以及ik中文分词插件">
+                <i class="fa fa-chevron-left"></i> docker安装es以及ik中文分词插件
               </a>
             
           </div>
@@ -403,10 +386,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/MongoTemplate两种方式读取mongodb/" rel="prev" title="MongoTemplate两种方式读取mongodb">
-                MongoTemplate两种方式读取mongodb <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -458,17 +437,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -539,22 +509,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#激活函数"><span class="nav-number">1.</span> <span class="nav-text">激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#激活函数有哪些"><span class="nav-number">2.</span> <span class="nav-text">激活函数有哪些</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
