@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://aaronzhou-whu.github.io/SpringBoot%E4%B8%ADapplication%E5%92%8Cbootstrap%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB/</loc>
+    
+    <lastmod>2019-09-20T06:00:15.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://aaronzhou-whu.github.io/Java%E4%B8%AD%E5%80%BC%E4%BC%A0%E9%80%92%E5%92%8C%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92%E4%BB%A5%E5%8F%8Amutable%E5%AF%B9%E8%B1%A1%E5%92%8Cimmutable%E5%AF%B9%E8%B1%A1/</loc>
+    
+    <lastmod>2019-04-18T05:10:24.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://aaronzhou-whu.github.io/Springboot%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E6%BA%90DataSource/</loc>
     
     <lastmod>2019-04-10T12:17:30.000Z</lastmod>

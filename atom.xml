@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://aaronzhou-whu.github.io/"/>
-  <updated>2019-04-10T12:17:30.000Z</updated>
+  <updated>2019-09-20T06:00:15.000Z</updated>
   <id>https://aaronzhou-whu.github.io/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot中application和bootstrap配置文件的区别</title>
+    <link href="https://aaronzhou-whu.github.io/SpringBoot%E4%B8%ADapplication%E5%92%8Cbootstrap%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>https://aaronzhou-whu.github.io/SpringBoot中application和bootstrap配置文件的区别/</id>
+    <published>2019-09-20T05:44:59.000Z</published>
+    <updated>2019-09-20T06:00:15.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="加载顺序"><a href="#加载顺序" class="headerlink" title="加载顺序"></a>加载顺序</h3><ul><li>bootstrap.yml（bootstrap.properties）先加载</li><li>application.yml（application.properties）后加载</li></ul><h3 id="二者不同"><a href="#二者不同" class="headerlink" title="二者不同"></a>二者不同</h3><p>跟 application 相比，bootstrap 配置文件具有以下几个特性：</p><ul><li>bootstrap 由父 ApplicationContext 加载，比 application 优先加载</li><li>bootstrap 里面的属性不能被覆盖<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3>application：主要用于spring boot 项目的自动化配置<br>bootstrap：</li><li>使用spring Cloud config 配置中心时，这时需要在bootstrap 配置文件中添加连接到配置中心的配置属性来加载外部配置中心的配置信息</li><li>一些固定的不能被覆盖的配置</li><li>一些加密/解密的场景</li></ul><p><strong>注意：一旦 bootStrap 被加载，则内容不会被覆盖，即便后期加载的 application 的内容标签与 bootstrap 的标签一致，application 也不会覆盖 bootstrap, 而 application 里面的内容可以动态替换。</strong> </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;加载顺序&quot;&gt;&lt;a href=&quot;#加载顺序&quot; class=&quot;headerlink&quot; title=&quot;加载顺序&quot;&gt;&lt;/a&gt;加载顺序&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;bootstrap.yml（bootstrap.properties）先加载&lt;/li&gt;
+&lt;li&gt;applicat
+      
+    
+    </summary>
+    
+    
+      <category term="SpringBoot" scheme="https://aaronzhou-whu.github.io/tags/SpringBoot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java中值传递和引用传递以及mutable对象和immutable对象</title>
+    <link href="https://aaronzhou-whu.github.io/Java%E4%B8%AD%E5%80%BC%E4%BC%A0%E9%80%92%E5%92%8C%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92%E4%BB%A5%E5%8F%8Amutable%E5%AF%B9%E8%B1%A1%E5%92%8Cimmutable%E5%AF%B9%E8%B1%A1/"/>
+    <id>https://aaronzhou-whu.github.io/Java中值传递和引用传递以及mutable对象和immutable对象/</id>
+    <published>2019-04-18T03:28:40.000Z</published>
+    <updated>2019-04-18T05:10:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>基本数据类型传值，对形参的修改不会影响实参；</li><li>引用类型传引用，形参和实参指向同一个内存地址（同一个对象），所以对参数的修改会影响到实际的对象。</li><li>String, Integer, Double等immutable的类型特殊处理，可以理解为传值，最后的操作不会修改实参对象。</li></ol><p>第一个例子：基本类型<br>void foo(int value) {<br>    value = 100;<br>}<br>foo(num); // num 没有被改变</p><p>第二个例子：没有提供改变自身方法的引用类型<br>void foo(String text) {<br>    text = “windows”;<br>}<br>foo(str); // str 也没有被改变</p><p>第三个例子：提供了改变自身方法的引用类型<br>StringBuilder sb = new StringBuilder(“iphone”);<br>void foo(StringBuilder builder) {<br>    builder.append(“4”);<br>}<br>foo(sb); // sb 被改变了，变成了”iphone4”。</p><p>第四个例子：提供了改变自身方法的引用类型，但是不使用，而是使用赋值运算符。<br>StringBuilder sb = new StringBuilder(“iphone”);<br>void foo(StringBuilder builder) {<br>    builder = new StringBuilder(“ipad”);<br>}<br>foo(sb); // sb 没有被改变，还是 “iphone”。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;基本数据类型传值，对形参的修改不会影响实参；&lt;/li&gt;
+&lt;li&gt;引用类型传引用，形参和实参指向同一个内存地址（同一个对象），所以对参数的修改会影响到实际的对象。&lt;/li&gt;
+&lt;li&gt;String, Integer, Double等immutable的类型特殊处理，
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Springboot自定义数据源DataSource</title>
@@ -444,53 +493,6 @@
     
     
       <category term="JVM" scheme="https://aaronzhou-whu.github.io/tags/JVM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mybatis避坑总结（持续更新ing）</title>
-    <link href="https://aaronzhou-whu.github.io/mybatis%E9%81%BF%E5%9D%91%E6%80%BB%E7%BB%93%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0ing%EF%BC%89/"/>
-    <id>https://aaronzhou-whu.github.io/mybatis避坑总结（持续更新ing）/</id>
-    <published>2018-07-30T02:41:58.000Z</published>
-    <updated>2018-07-30T10:50:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="坑一：mybatis-找不到映射器xml文件"><a href="#坑一：mybatis-找不到映射器xml文件" class="headerlink" title="坑一：mybatis 找不到映射器xml文件"></a>坑一：mybatis 找不到映射器xml文件</h3><p>项目打包的时候，出现了找不到xml文件的错误，<code>Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource xxx/mapper/xxx.xml</code>，我用的绝对路径但是没有把resource改为url，导致出现<code>file not found</code> error。<br>官方文档给出了四种配置方式：相对路径、绝对路径、Mapper路径、Package路径。<br>```xml<br><!-- Using classpath relative resources --></p><p><mappers><br>  <mapper resource="xxx/mapper/xxx.xml"><br></mapper></mappers><br><!-- Using url fully qualified paths --></p><p><mappers><br>  <mapper url="file:///xxx/mappers/xxx.xml"><br></mapper></mappers><br><!-- Using mapper interface classes --></p><p><mappers><br>  <mapper class="org.mybatis.builder.XXXMapper"><br></mapper></mappers><br><!-- Register all interfaces in a package as mappers --></p><p><mappers><br>  <package name="org.mybatis.builder"><br></package></mappers></p><h3 id="坑二：mybatis-批量插入list"><a href="#坑二：mybatis-批量插入list" class="headerlink" title="坑二：mybatis 批量插入list"></a>坑二：mybatis 批量插入list</h3><p>批量写入的时候用foreach collection，mysql和oracle数据库还有细微差别。<br><strong>Oracle:</strong><br>```xml</p><insert id="inserList" parametertype="com.test.aaa"><br>    insert into table_name (name, adress, age)<br>    values<br>    <foreach collection="list" item="item" index="index" separator=","><br>        (select<br>        #{item.name},#{item.adress}, #{item.age}<br>        from dual)<br>    </foreach><br></insert><br><strong>MySQL:</strong><br>```xml<br><insert id="inserList" parametertype="com.test.aaa"><br>    insert into table_name (name, adress, age)<br>    values<br>    <foreach collection="list" item="item" index="index" separator=","><br>        (#{item.name},  #{item.adress},  #{item.age})<br>    </foreach><br></insert>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;坑一：mybatis-找不到映射器xml文件&quot;&gt;&lt;a href=&quot;#坑一：mybatis-找不到映射器xml文件&quot; class=&quot;headerlink&quot; title=&quot;坑一：mybatis 找不到映射器xml文件&quot;&gt;&lt;/a&gt;坑一：mybatis 找不到映射器xml
-      
-    
-    </summary>
-    
-    
-      <category term="MyBatis" scheme="https://aaronzhou-whu.github.io/tags/MyBatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Kaggle之Titanic</title>
-    <link href="https://aaronzhou-whu.github.io/Kaggle%E4%B9%8BTitanic/"/>
-    <id>https://aaronzhou-whu.github.io/Kaggle之Titanic/</id>
-    <published>2018-07-28T15:47:34.000Z</published>
-    <updated>2018-07-29T15:33:14.000Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>In this challenge, we ask you to complete the analysis of what sorts of people were likely to survive. In particular, we ask you to apply the tools of machine learning to predict which passengers survived the tragedy.</p></blockquote><hr><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>问题：这个问题很明显是一道分类问题，预测<code>survive or die</code>的二分类问题。<br>方法：逻辑回归(LogisticRegression)、支持向量机(SVM)、CART等</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;In this challenge, we ask you to complete the analysis of what sorts of people were likely to survive. In particular, we ask
-      
-    
-    </summary>
-    
-    
-      <category term="Kaggle MachineLearning" scheme="https://aaronzhou-whu.github.io/tags/Kaggle-MachineLearning/"/>
     
   </entry>
   
