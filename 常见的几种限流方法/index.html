@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="##1.计数器法：原理：系统维护一个计数器，来一个请求就加1，请求解决完成就减1，当计数器大于指定的阈值，就拒绝新的请求。基于这个简单的方法，可以再延伸出少量高级功能，比方阈值可以不是固定值，是动态调整的。另外，还可以有多组计数器分别管理不同的服务，以保证互不影响等。缺点：恶意用户通过在时间窗口的重置节点处突发请求， 可以瞬间超过我们的速率限制。用户有可能通过算法的这个漏洞，瞬间压垮我们的应用。">
+<meta name="description" content="1.计数器法：原理：系统维护一个计数器，来一个请求就加1，请求解决完成就减1，当计数器大于指定的阈值，就拒绝新的请求。基于这个简单的方法，可以再延伸出少量高级功能，比方阈值可以不是固定值，是动态调整的。另外，还可以有多组计数器分别管理不同的服务，以保证互不影响等。缺点：恶意用户通过在时间窗口的重置节点处突发请求， 可以瞬间超过我们的速率限制。用户有可能通过算法的这个漏洞，瞬间压垮我们的应用。 2、">
 <meta name="keywords" content="microservice">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常见的几种限流方法">
 <meta property="og:url" content="https://aaronzhou-whu.github.io/常见的几种限流方法/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="##1.计数器法：原理：系统维护一个计数器，来一个请求就加1，请求解决完成就减1，当计数器大于指定的阈值，就拒绝新的请求。基于这个简单的方法，可以再延伸出少量高级功能，比方阈值可以不是固定值，是动态调整的。另外，还可以有多组计数器分别管理不同的服务，以保证互不影响等。缺点：恶意用户通过在时间窗口的重置节点处突发请求， 可以瞬间超过我们的速率限制。用户有可能通过算法的这个漏洞，瞬间压垮我们的应用。">
+<meta property="og:description" content="1.计数器法：原理：系统维护一个计数器，来一个请求就加1，请求解决完成就减1，当计数器大于指定的阈值，就拒绝新的请求。基于这个简单的方法，可以再延伸出少量高级功能，比方阈值可以不是固定值，是动态调整的。另外，还可以有多组计数器分别管理不同的服务，以保证互不影响等。缺点：恶意用户通过在时间窗口的重置节点处突发请求， 可以瞬间超过我们的速率限制。用户有可能通过算法的这个漏洞，瞬间压垮我们的应用。 2、">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-26T12:17:43.000Z">
+<meta property="og:updated_time" content="2019-11-26T12:21:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常见的几种限流方法">
-<meta name="twitter:description" content="##1.计数器法：原理：系统维护一个计数器，来一个请求就加1，请求解决完成就减1，当计数器大于指定的阈值，就拒绝新的请求。基于这个简单的方法，可以再延伸出少量高级功能，比方阈值可以不是固定值，是动态调整的。另外，还可以有多组计数器分别管理不同的服务，以保证互不影响等。缺点：恶意用户通过在时间窗口的重置节点处突发请求， 可以瞬间超过我们的速率限制。用户有可能通过算法的这个漏洞，瞬间压垮我们的应用。">
+<meta name="twitter:description" content="1.计数器法：原理：系统维护一个计数器，来一个请求就加1，请求解决完成就减1，当计数器大于指定的阈值，就拒绝新的请求。基于这个简单的方法，可以再延伸出少量高级功能，比方阈值可以不是固定值，是动态调整的。另外，还可以有多组计数器分别管理不同的服务，以保证互不影响等。缺点：恶意用户通过在时间窗口的重置节点处突发请求， 可以瞬间超过我们的速率限制。用户有可能通过算法的这个漏洞，瞬间压垮我们的应用。 2、">
 
 
 
@@ -339,11 +339,11 @@
       
 
       
-        <p>##1.计数器法：<br><strong>原理：</strong><br>系统维护一个计数器，来一个请求就加1，请求解决完成就减1，当计数器大于指定的阈值，就拒绝新的请求。<br>基于这个简单的方法，可以再延伸出少量高级功能，比方阈值可以不是固定值，是动态调整的。另外，还可以有多组计数器分别管理不同的服务，以保证互不影响等。<br><strong>缺点：</strong><br>恶意用户通过在时间窗口的重置节点处突发请求， 可以瞬间超过我们的速率限制。用户有可能通过算法的这个漏洞，瞬间压垮我们的应用。</p>
-<p>##2、滑动窗口<br>滑动窗口，又称rolling window。可以解决计数器法临界时间大量突发请求问题。<br>比如某个服务最多只能每秒钟处理100个请求。我们可以设置一个1秒钟的滑动窗口，窗口中有10个格子，每个格子100毫秒，每100毫秒移动一次，每次移动都需要记录当前服务请求的次数。内存中需要保存10次的次数。可以用数据结构LinkedList来实现。<br><code>滑动窗口格子划分越多，窗口滚动就越平滑，限流统计就会越精确。</code></p>
-<p>##3、漏桶算法<br>漏桶(Leaky Bucket)算法思路很简单,水(请求)先进入到漏桶里,漏桶以一定的速度出水(接口有响应速率),当水流入速度过大会直接溢出(访问频率超过接口响应速率),然后就拒绝请求,可以看出漏桶算法能强行限制数据的传输速率。</p>
+        <h2 id="1-计数器法："><a href="#1-计数器法：" class="headerlink" title="1.计数器法："></a>1.计数器法：</h2><p><strong>原理：</strong><br>系统维护一个计数器，来一个请求就加1，请求解决完成就减1，当计数器大于指定的阈值，就拒绝新的请求。<br>基于这个简单的方法，可以再延伸出少量高级功能，比方阈值可以不是固定值，是动态调整的。另外，还可以有多组计数器分别管理不同的服务，以保证互不影响等。<br><strong>缺点：</strong><br>恶意用户通过在时间窗口的重置节点处突发请求， 可以瞬间超过我们的速率限制。用户有可能通过算法的这个漏洞，瞬间压垮我们的应用。</p>
+<h2 id="2、滑动窗口"><a href="#2、滑动窗口" class="headerlink" title="2、滑动窗口"></a>2、滑动窗口</h2><p>滑动窗口，又称rolling window。可以解决计数器法临界时间大量突发请求问题。<br>比如某个服务最多只能每秒钟处理100个请求。我们可以设置一个1秒钟的滑动窗口，窗口中有10个格子，每个格子100毫秒，每100毫秒移动一次，每次移动都需要记录当前服务请求的次数。内存中需要保存10次的次数。可以用数据结构LinkedList来实现。<br><code>滑动窗口格子划分越多，窗口滚动就越平滑，限流统计就会越精确。</code></p>
+<h2 id="3、漏桶算法"><a href="#3、漏桶算法" class="headerlink" title="3、漏桶算法"></a>3、漏桶算法</h2><p>漏桶(Leaky Bucket)算法思路很简单,水(请求)先进入到漏桶里,漏桶以一定的速度出水(接口有响应速率),当水流入速度过大会直接溢出(访问频率超过接口响应速率),然后就拒绝请求,可以看出漏桶算法能强行限制数据的传输速率。</p>
 <p>因为漏桶的漏出速率是固定的参数,所以,即使网络中不存在资源冲突(没有发生拥塞),漏桶算法也不能使流突发(burst)到端口速率.因此,漏桶算法对于存在突发特性的流量来说缺乏效率。<br>用MQ来做流量削峰，就是这个算法的一种实践！</p>
-<p>##4、令牌桶算法<br>令牌桶算法（Token Bucket），是网络流量整形（Traffic Shaping）和速率限制（Rate Limiting）中最常使用的一种算法。典型情况下，令牌桶算法用来控制发送到网络上的数据的数目，并允许突发数据的发送。<br>Guava提供了限流工具类RateLimiter,该类基于令牌桶算法(Token Bucket)来完成限流, 将一秒钟切割为令牌数的时间片段，每个时间片段等同于一个token。RateLimiter经常用于限制对一些物理资源或者逻辑资源的访问速率。</p>
+<h2 id="4、令牌桶算法"><a href="#4、令牌桶算法" class="headerlink" title="4、令牌桶算法"></a>4、令牌桶算法</h2><p>令牌桶算法（Token Bucket），是网络流量整形（Traffic Shaping）和速率限制（Rate Limiting）中最常使用的一种算法。典型情况下，令牌桶算法用来控制发送到网络上的数据的数目，并允许突发数据的发送。<br>Guava提供了限流工具类RateLimiter,该类基于令牌桶算法(Token Bucket)来完成限流, 将一秒钟切割为令牌数的时间片段，每个时间片段等同于一个token。RateLimiter经常用于限制对一些物理资源或者逻辑资源的访问速率。</p>
 
       
     </div>
@@ -434,8 +434,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -506,6 +515,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-计数器法："><span class="nav-number">1.</span> <span class="nav-text">1.计数器法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、滑动窗口"><span class="nav-number">2.</span> <span class="nav-text">2、滑动窗口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、漏桶算法"><span class="nav-number">3.</span> <span class="nav-text">3、漏桶算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、令牌桶算法"><span class="nav-number">4.</span> <span class="nav-text">4、令牌桶算法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
