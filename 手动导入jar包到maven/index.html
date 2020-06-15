@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, zhizhi" />
+  <meta name="keywords" content="springboot," />
 
 
 
@@ -73,16 +73,18 @@
 
 
 
-<meta name="description" content="stay hungary, stay foolish">
-<meta property="og:type" content="website">
-<meta property="og:title" content="BinYingの部屋">
-<meta property="og:url" content="https://aaronzhou-whu.github.io/tags/JVM/index.html">
+<meta name="description" content="有时候maven依赖下载jar包太慢或者干脆下不下来，此时可以将所需的jar下到本地某文件夹:/mydir，然后mvn install导入。假如maven的依赖如下：12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;com.xx&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;aa-bb&amp;lt;/artifactId&amp;gt;    &amp;lt">
+<meta name="keywords" content="springboot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手动导入jar包到maven">
+<meta property="og:url" content="https://aaronzhou-whu.github.io/手动导入jar包到maven/index.html">
 <meta property="og:site_name" content="BinYingの部屋">
-<meta property="og:description" content="stay hungary, stay foolish">
+<meta property="og:description" content="有时候maven依赖下载jar包太慢或者干脆下不下来，此时可以将所需的jar下到本地某文件夹:/mydir，然后mvn install导入。假如maven的依赖如下：12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;com.xx&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;aa-bb&amp;lt;/artifactId&amp;gt;    &amp;lt">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-06-15T11:36:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BinYingの部屋">
-<meta name="twitter:description" content="stay hungary, stay foolish">
+<meta name="twitter:title" content="手动导入jar包到maven">
+<meta name="twitter:description" content="有时候maven依赖下载jar包太慢或者干脆下不下来，此时可以将所需的jar下到本地某文件夹:/mydir，然后mvn install导入。假如maven的依赖如下：12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;com.xx&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;aa-bb&amp;lt;/artifactId&amp;gt;    &amp;lt">
 
 
 
@@ -112,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="https://aaronzhou-whu.github.io/tags/JVM/"/>
+  <link rel="canonical" href="https://aaronzhou-whu.github.io/手动导入jar包到maven/"/>
 
 
 
 
 
-  <title>标签: JVM | BinYingの部屋</title>
+  <title>手动导入jar包到maven | BinYingの部屋</title>
   
 
 
@@ -137,7 +139,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -251,82 +253,153 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>JVM<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aaronzhou-whu.github.io/手动导入jar包到maven/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron Zhou">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BinYingの部屋">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/Linux服务器进程CPU使用率超100问题排查/" itemprop="url">
-              
-                <span itemprop="name">Linux服务器进程CPU使用率超100%排查</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">手动导入jar包到maven</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-15T21:43:52+08:00"
-              content="2018-09-15 21:43:52" >
-          09-15
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-12T09:39:23+08:00">
+                2020-06-12 09:39:23
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/JDK监控和故障处理工具/" itemprop="url">
-              
-                <span itemprop="name">JDK监控和故障处理工具</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-13T20:27:54+08:00"
-              content="2018-08-13 20:27:54" >
-          08-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
+        <p>有时候maven依赖下载jar包太慢或者干脆下不下来，此时可以将所需的jar下到本地某文件夹:/mydir，然后mvn install导入。<br>假如maven的依赖如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.xx<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aa-bb<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>命令:mvn install:install-file -Dfile=/mydir/aa-bb-1.1.jar -DgroupId=com.xx -DartifactId=aa-bb -Dversion=1.1 -Dpackaging=jar</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/springboot/" rel="tag"># springboot</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/常见的几种限流方法/" rel="next" title="常见的几种限流方法">
+                <i class="fa fa-chevron-left"></i> 常见的几种限流方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -334,6 +407,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -580,6 +657,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

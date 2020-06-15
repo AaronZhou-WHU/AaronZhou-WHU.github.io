@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://aaronzhou-whu.github.io/"/>
-  <updated>2019-11-26T12:23:10.000Z</updated>
+  <updated>2020-06-15T11:36:33.000Z</updated>
   <id>https://aaronzhou-whu.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>手动导入jar包到maven</title>
+    <link href="https://aaronzhou-whu.github.io/%E6%89%8B%E5%8A%A8%E5%AF%BC%E5%85%A5jar%E5%8C%85%E5%88%B0maven/"/>
+    <id>https://aaronzhou-whu.github.io/手动导入jar包到maven/</id>
+    <published>2020-06-12T01:39:23.000Z</published>
+    <updated>2020-06-15T11:36:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>有时候maven依赖下载jar包太慢或者干脆下不下来，此时可以将所需的jar下到本地某文件夹:/mydir，然后mvn install导入。<br>假如maven的依赖如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.xx<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aa-bb<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p><p>命令:mvn install:install-file -Dfile=/mydir/aa-bb-1.1.jar -DgroupId=com.xx -DartifactId=aa-bb -Dversion=1.1 -Dpackaging=jar</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;有时候maven依赖下载jar包太慢或者干脆下不下来，此时可以将所需的jar下到本地某文件夹:/mydir，然后mvn install导入。&lt;br&gt;假如maven的依赖如下：&lt;br&gt;&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td c
+      
+    
+    </summary>
+    
+    
+      <category term="springboot" scheme="https://aaronzhou-whu.github.io/tags/springboot/"/>
+    
+  </entry>
   
   <entry>
     <title>常见的几种限流方法</title>
@@ -417,9 +440,9 @@
     <link href="https://aaronzhou-whu.github.io/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%E9%A2%98%EF%BC%88%E7%BB%AD%EF%BC%89/"/>
     <id>https://aaronzhou-whu.github.io/二叉树相关算法题（续）/</id>
     <published>2018-08-28T08:22:58.000Z</published>
-    <updated>2018-09-04T12:26:53.000Z</updated>
+    <updated>2020-06-15T11:34:19.000Z</updated>
     
-    <content type="html"><![CDATA[<p>接着之前的那一篇文章——<a href="https://aaronzhou-whu.github.io/二叉树相关算法题">二叉树相关算法题</a></p><p>后序遍历（非递归）：<br>public void postOrderTraverse(TreeNode root) {<br>    // 待续…<br>} </p><p>层次遍历：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">levelTraverse</span><span class="params">(TreeNode root)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;  </span><br><span class="line">        Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;TreeNode&gt;();</span><br><span class="line">        queue.offer(root);</span><br><span class="line">        <span class="keyword">while</span>(!queue.empty())&#123;</span><br><span class="line">            TreeNode tmp = queue.poll();</span><br><span class="line">            System.out.print(ymp.val+<span class="string">"  "</span>);  </span><br><span class="line">            queue.offer(tmp.left);</span><br><span class="line">            queue.offer(tmp.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
+    <content type="html"><![CDATA[<p>接着之前的那一篇文章——<a href="https://aaronzhou-whu.github.io/二叉树相关算法题">二叉树相关算法题</a></p><p>后序遍历（非递归）：<br>public void postOrderTraverse(TreeNode root) {<br>    // 待续…<br>} </p><p>层次遍历：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">levelTraverse</span><span class="params">(TreeNode root)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (root != <span class="keyword">null</span>) &#123;  </span><br><span class="line">        Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;TreeNode&gt;();</span><br><span class="line">        queue.offer(root);</span><br><span class="line">        <span class="keyword">while</span>(!queue.empty())&#123;</span><br><span class="line">            TreeNode tmp = queue.poll();</span><br><span class="line">            System.out.print(tmp.val+<span class="string">"  "</span>);  </span><br><span class="line">            queue.offer(tmp.left);</span><br><span class="line">            queue.offer(tmp.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
     
     <summary type="html">
     
@@ -451,30 +474,6 @@
       
         &lt;p&gt;这篇主要记录一些Buffer相关知识点。&lt;/p&gt;
 &lt;h3 id=&quot;Buffer中的三个重要属性：&quot;&gt;&lt;a href=&quot;#Buffer中的三个重要属性：&quot; class=&quot;headerlink&quot; title=&quot;Buffer中的三个重要属性：&quot;&gt;&lt;/a&gt;Buffer中的三个重要属
-      
-    
-    </summary>
-    
-    
-      <category term="NIO" scheme="https://aaronzhou-whu.github.io/tags/NIO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NIO小结（一）</title>
-    <link href="https://aaronzhou-whu.github.io/NIO%E5%B0%8F%E7%BB%93%EF%BC%88%E4%B8%80%EF%BC%89/"/>
-    <id>https://aaronzhou-whu.github.io/NIO小结（一）/</id>
-    <published>2018-08-19T14:57:29.000Z</published>
-    <updated>2018-08-19T15:28:46.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近看很多分布式框架或者高并发框架，底层通信很多都是基于Netty，而Netty的核心又是NIO（<em>NoneBlocking IO</em> ），是非阻塞的。</p><p>NIO中最主要的是Buffer（缓冲）、Channel（通道）还有Selector（选择器，也叫多路复用器）。</p><p><strong>Buffer</strong>使用 Native 函数库直接分配堆外内存，然后通过一个存储在 Java 堆的 DirectByteBuffer 对象作为这块内存的引用进行操作，避免了在 Java 堆和 Native 堆中来回复制数据。在BIO（阻塞IO）中，等待IO的线程必须被阻塞，这样效率会很低，引入Buffer缓冲区，当数据到达时，可以预先被写入缓冲区，再由缓冲区交给线程，因此线程无需阻塞地等待IO。</p><p><strong>Channel</strong>是数据流通的通道，前面提到的Buffer只是数据的缓冲区，那么数据从哪里来以及到哪里去，都会经过一个流通通道。Channel 是对数据的源头和数据目标点流经途径的抽象，在这个意义上和InputStream和OutputStream类似。Buffer和Channel都是配合使用的。</p><p><strong>Selector</strong>，很多高并发通信框架为何可以做到高并发，就是基于selector这种多路复用原理，一个线程可以负责多个channel。首先创建一个elector，然后将channel注册到selector，最后调用 select() 方法获取通道信息，用于判断是否有我们感兴趣的事件已经发生。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;最近看很多分布式框架或者高并发框架，底层通信很多都是基于Netty，而Netty的核心又是NIO（&lt;em&gt;NoneBlocking IO&lt;/em&gt; ），是非阻塞的。&lt;/p&gt;
-&lt;p&gt;NIO中最主要的是Buffer（缓冲）、Channel（通道）还有Selector（选择器，也
       
     
     </summary>
